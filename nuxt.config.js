@@ -73,15 +73,12 @@ module.exports = {
     'nuxt-webpackdashboard',
     '@nuxtjs/pwa',
     // Simple usage
-    // ['@nuxtjs/google-analytics', {
-    // id: 'UA-XXXXXX-4',
-    // }],
     // '@nuxtjs/bulma',
   ],
 
   manifest: {
-    name: 'Animeloop Beta',
-    short_name: 'Animeloop β',
+    name: 'Animeloop',
+    short_name: 'Animeloop',
     description: 'Animeloop Web Frontend',
     ogTitle: false,
     ogDescription: false,

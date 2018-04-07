@@ -113,12 +113,6 @@
   dependencies:
     bulma "^0.6.1"
 
-"@nuxtjs/google-analytics@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/google-analytics/-/google-analytics-2.0.2.tgz#75353143628fd7697b41eb5aa7da38a513394eca"
-  dependencies:
-    vue-analytics "^5.4.0"
-
 "@nuxtjs/icon@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/icon/-/icon-2.1.0.tgz#d06ff69778d54a65506a39862fe12ab2bba627b5"
@@ -9153,10 +9147,6 @@ vm-browserify@0.0.4:
 vm2@^3.5.0:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.5.2.tgz#6ae7c75a867775946e1d4a66623374e0245150e0"
-
-vue-analytics@^5.4.0:
-  version "5.9.1"
-  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.9.1.tgz#3ac9810f56dbe54bca4fd1c3ee42354b433d932b"
 
 vue-docgen-api@^2.3.4:
   version "2.3.4"
