@@ -1,21 +1,32 @@
 <template>
   <div
     :style="toggledStyle"
-    class="entry-container"
+    class="NavbarEntry"
   >
     <nuxt-link
       v-for="entry in entries"
       :key="entry.route"
       :to="{ name: entry.routeName }"
-      class="entry"
+      class="NavbarEntry-link"
       @click.native="toggleBurger"
     >
       <FontAwesomeIcon
         :icon="entry.icon"
-        class="entry-fa-icon"
+        class="NavbarEntry-faIcon"
       />
       <span>{{ $t(entry.name) }}</span>
     </nuxt-link>
+    <a
+      href="https://animeloop.org/api/docs/"
+      class="NavbarEntry-link"
+      @click.native="toggleBurger"
+    >
+      <FontAwesomeIcon
+        icon="terminal"
+        class="NavbarEntry-faIcon"
+      />
+      <span>{{ $t('navbar.api') }}</span>
+    </a>
   </div>
 </template>
 
@@ -49,14 +60,6 @@ export default {
       if (this.navStates.burgerOpen) return { display: 'flex' };
       return {};
     },
-    // centries() {
-    //   return [
-    //     { name: 'navbar.episode', icon: 'th-list' },
-    //     { name: 'navbar.tags', icon: 'tags' },
-    //     { name: 'navbar.random', icon: 'question-circle' },
-    //     { name: 'navbar.about', icon: 'info' },
-    //   ];
-    // },
   },
   methods: {
     // toggle burger menu after navigation
@@ -69,17 +72,16 @@ export default {
 </script>
 
 <style scoped lang="postcss">
-@import "~/assets/css/colors.css";
-@import "~/assets/css/mediaqueries.css";
+/** @define NavbarEntry */
 
-.entry-container {
+.NavbarEntry {
   display: flex;
   align-items: center;
   padding: 0 1em;
   height: 3em;
   flex-shrink: 0;
 
-  @media (--tablet-screen) {
+  @screen tablet {
     order: 4;
     flex-grow: 1;
     justify-content: space-between;
@@ -87,7 +89,7 @@ export default {
     margin: 0 -0.5em;
   }
 
-  @media (--phone-screen) {
+  @screen phone {
     order: 4;
     flex-grow: 1;
     justify-content: space-between;
@@ -102,14 +104,14 @@ export default {
 
 }
 
-.entry {
+.NavbarEntry-link {
   margin: 0 .5em;
   padding: .4em 0;
 
-  color: var(--black1);
+  color: config('colors.black1');
 
   &:hover {
-    border-bottom: .15rem solid var(--key-color-light);
+    border-bottom: .15rem solid config('colors.accent-color-light');
     padding-bottom: .2rem;
   }
 
@@ -119,10 +121,10 @@ export default {
   /* flex-wrap: nowrap; */
   align-items: center;
 
-  @media (--phone-screen) {
+  @screen phone {
     width: 100%;
     height: 3em;
-    :hover {
+    &:hover {
       border-bottom: none;
       padding: .4em 0;
     }
@@ -130,9 +132,9 @@ export default {
 
 }
 
-.entry-fa-icon {
+.NavbarEntry-faIcon {
   margin-right: .5em;
-  @media (--phone-screen) {
+  @screen phone {
     /* Vertical alignment */
     width: 1em;
   }
