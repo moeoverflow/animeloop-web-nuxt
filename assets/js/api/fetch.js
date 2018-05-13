@@ -79,6 +79,26 @@ const remote = {
       // Avoid request being blocked by uBlock
     },
   }),
+  // Auth API
+  signup: (username, email, password, gRecaptchaResponse) => callApi({
+    url: 'auth/register',
+    method: 'POST',
+    data: {
+      username,
+      email,
+      password,
+      'g-recaptcha-response': gRecaptchaResponse,
+    },
+  }),
+  login: (username, password, gRecaptchaResponse) => callApi({
+    url: 'auth/login',
+    method: 'POST',
+    data: {
+      username,
+      password,
+      'g-recaptcha-response': gRecaptchaResponse,
+    },
+  }),
 };
 
 export default remote;

@@ -5,6 +5,7 @@ const navbar = {
     burgerOpen: false,
     searchOpen: false,
     langOpen: false,
+    loginModalOpen: false,
   }),
 
   getters: {
@@ -25,6 +26,8 @@ const navbar = {
         commit('TOGGLE_NAVBAR_STATE', { type: 'searchOpen' });
       } else if (type === 'lang') {
         commit('TOGGLE_NAVBAR_STATE', { type: 'langOpen' });
+      } else if (type === 'loginModal') {
+        commit('TOGGLE_NAVBAR_STATE', { type: 'loginModalOpen' });
       } else {
         throw Error('Wrong toggle type');
       }
