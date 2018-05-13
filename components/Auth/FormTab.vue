@@ -67,7 +67,7 @@
           class="button is-link is-fullwidth"
           @click="submit"
         >
-          Login
+          {{ submitTitle }}
         </button>
       </p>
     </div>
@@ -130,6 +130,14 @@ export default {
     },
     isSubmiting() {
       return this.submiting ? 'is-loading' : '';
+    },
+    submitTitle() {
+      if (this.formType === 'login') {
+        return 'Login';
+      } else if (this.formType === 'signup') {
+        return 'Sign Up';
+      }
+      return 'None';
     },
     icon() {
       return {
