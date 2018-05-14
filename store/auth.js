@@ -6,7 +6,7 @@ const auth = {
   }),
   mutations: {
     SET_USER(state, data) {
-      state.authUser = data.authUser;
+      state.authUser = data;
     },
   },
   actions: {

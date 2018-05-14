@@ -1,3 +1,8 @@
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+const uid = require('uid-safe');
+
 // const VueI18n = require('vue-i18n');
 const i18nExtensions = require('vue-i18n-extensions');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
@@ -103,6 +108,30 @@ module.exports = {
     ogDescription: false,
     theme_color: '#FFFFFF',
   },
+
+  /*
+  ** add express-session middleware
+  ** add redis store for saving and sharing session data with api server
+  */
+  serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+      name: 'animeloop.auth.sid',
+      genid: req => (req.session ? req.session.id : uid(24)),
+      store: new RedisStore({
+        host: '127.0.0.1',
+        port: '6379',
+        db: 10,
+      }),
+      secret: 'animeloop',
+      rolling: true,
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 },
+    }),
+  ],
 
   // workbox: {
   //   runtimeCaching: [

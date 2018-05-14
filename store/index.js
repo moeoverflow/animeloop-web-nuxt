@@ -25,8 +25,6 @@ const createStore = () => new Vuex.Store({
   },
   actions: {
     nuxtServerInit({ commit }, { req }) {
-      // console.log('nuxtServerInit');
-      commit('SET_USER', 'testtest');
       if (req.session && req.session.authUser) {
         commit('SET_USER', req.session.authUser);
       }

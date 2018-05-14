@@ -24,7 +24,10 @@ function encodeFormData(data) {
 async function callApi(request) {
   const init = {
     method: request.method || 'GET',
-    headers: {},
+    headers: {
+    },
+    credentials: 'include',
+    mode: 'cors',
   };
   const hasBody = !((init.method === 'GET') || (init.method === 'HEAD'));
 
