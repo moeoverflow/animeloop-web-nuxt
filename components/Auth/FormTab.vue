@@ -177,22 +177,24 @@ export default {
           gRecaptchaResponse,
         } = this.formData;
         this.submiting = true;
-        await remote.signup(username, email, password, gRecaptchaResponse);
+        const result = await remote.signup(username, email, password, gRecaptchaResponse);
         this.submiting = false;
-      } else if (this.formType === 'login') {
-        const data = {
-          username: this.formData.username,
-          password: this.formData.password,
-          // gRecaptchaResponse: this.formData.gRecaptchaResponse,
-        };
-
-        this.submiting = true;
-        try {
-          await this.$store.dispatch('login', data);
-        } catch (e) {
-          this.error = e.message;
+        if (result.code === 200) {
+          this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
         }
+      } else if (this.formType === 'login') {
+        // Login submit
+        const {
+          username,
+          password,
+          gRecaptchaResponse,
+        } = this.formData;
+        this.submiting = true;
+        const result = await this.$store.dispatch('login', { username, password, gRecaptchaResponse });
         this.submiting = false;
+        if (result.code === 200) {
+          this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+        }
       }
     },
   },

@@ -12,8 +12,9 @@ const auth = {
   actions: {
     async login({ commit }, { username, password, gRecaptchaResponse }) {
       try {
-        const { data } = await remote.login(username, password, gRecaptchaResponse);
-        commit('SET_USER', data);
+        const result = await remote.login(username, password, gRecaptchaResponse);
+        commit('SET_USER', result.data);
+        return result;
       } catch (error) {
         if (error.response && error.response.status === 401) {
           throw new Error('Bad credentials');
