@@ -103,6 +103,10 @@ export default {
   },
   data() {
     return {
+      message: {
+        type: '',
+        body: '',
+      },
       formData: {
         username: '',
         email: '',
@@ -170,6 +174,7 @@ export default {
     },
     async submit() {
       if (this.formType === 'signup') {
+        // Signup submit
         const {
           username,
           email,

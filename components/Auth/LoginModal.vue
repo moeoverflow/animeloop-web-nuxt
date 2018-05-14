@@ -6,7 +6,10 @@
     >
       <div class="modal-background"/>
       <div class="modal-content">
-        <div class="box">
+        <div
+          v-click-outside="onClickOutside"
+          class="box"
+        >
           <div class="tabs is-primary is-right">
             <ul>
               <li class="login-logo">
@@ -49,11 +52,6 @@
           />
         </div>
       </div>
-      <button
-        class="modal-close is-large"
-        aria-label="close"
-        @click="closeModal"
-      />
     </div>
   </div>
 </template>
@@ -77,7 +75,7 @@ export default {
   props: {
     isActive: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   data() {
@@ -92,12 +90,12 @@ export default {
         faPencilAlt,
       };
     },
+    navStates() {
+      return this.$store.state.navbar;
+    },
   },
 
   methods: {
-    closeModal() {
-      this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
-    },
     isTabActive(tab) {
       return tab === this.tabActive;
     },
@@ -106,6 +104,11 @@ export default {
     },
     switchTab(tab) {
       this.tabActive = tab;
+    },
+    onClickOutside() {
+      if (this.isActive) {
+        this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+      }
     },
   },
 };
