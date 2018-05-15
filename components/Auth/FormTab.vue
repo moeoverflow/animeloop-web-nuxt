@@ -1,11 +1,15 @@
 <template>
-  <div class="login-tab">
+  <div class="form-tab">
+    <FormMessage
+      :type="message.type"
+      :content="message.content"
+    />
     <div
       v-show="isShowUsername"
       class="field"
     >
       <label class="label">Username</label>
-      <div class="control has-icons-left has-icons-right">
+      <div class="control has-icons-left">
         <input
           v-model="formData.username"
           class="input"
@@ -22,7 +26,7 @@
       class="field"
     >
       <label class="label">Email</label>
-      <p class="control has-icons-left has-icons-right">
+      <p class="control has-icons-left">
         <input
           v-model="formData.email"
           class="input"
@@ -81,6 +85,8 @@
 </template>
 
 <script>
+/* eslint-disable no-fallthrough */
+
 /**
  * Login of the Navbar.
  */
@@ -88,12 +94,14 @@ import remote from '~/assets/js/api/fetch';
 import VueRecaptcha from 'vue-recaptcha';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import { faUser, faLock, faCheck, faEnvelope } from '@fortawesome/fontawesome-free-solid';
+import FormMessage from './FormMessage';
 
 export default {
   name: 'LoginTab',
   components: {
     VueRecaptcha,
     FontAwesomeIcon,
+    FormMessage,
   },
   props: {
     formType: {
@@ -105,7 +113,7 @@ export default {
     return {
       message: {
         type: '',
-        body: '',
+        content: '',
       },
       formData: {
         username: '',
@@ -154,7 +162,7 @@ export default {
     isLoginAvaliable() {
       const validUsername = /^[a-zA-Z0-9_-]{5,15}$/.test(this.formData.username);
       const validEmail = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/.test(this.formData.email);
-      const validPassword = /^[a-zA-Z]\w{6,17}$/.test(this.formData.password);
+      const validPassword = /^\w{8,32}$/.test(this.formData.password);
       const validgRecaptchaResponse = this.formData.gRecaptchaResponse.length !== 0;
 
       if (this.formType === 'login') {
@@ -184,8 +192,35 @@ export default {
         this.submiting = true;
         const result = await remote.signup(username, email, password, gRecaptchaResponse);
         this.submiting = false;
-        if (result.code === 200) {
-          this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+        switch (result.code) {
+          case 1120001:
+            this.formData.username = '';
+            this.formData.email = '';
+            this.formData.password = '';
+
+            this.$emit('signup-success', result.code);
+            break;
+          case 1140001:
+          case 1140002:
+            this.formData.username = '';
+          case 1140003:
+          case 1140004:
+            this.formData.password = '';
+          case 1140005:
+          case 1140006:
+            this.formData.email = '';
+          case 1940101:
+          case 1140901:
+            this.message = {
+              type: 'is-danger',
+              content: `response.signup.${result.code}`,
+            };
+            break;
+          default:
+            this.message = {
+              type: 'is-danger',
+              content: 'response.unknown-error',
+            };
         }
       } else if (this.formType === 'login') {
         // Login submit
@@ -197,10 +232,41 @@ export default {
         this.submiting = true;
         const result = await this.$store.dispatch('login', { username, password, gRecaptchaResponse });
         this.submiting = false;
-        if (result.code === 200) {
-          this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+        switch (result.code) {
+          case 1220001:
+            this.toggleLoginModal();
+            break;
+          case 1240102:
+            this.message = {
+              type: 'is-warning',
+              content: `response.login.${result.code}`,
+            };
+            break;
+          case 1240101:
+            this.formData.password = '';
+          case 1940101:
+          case 1950301:
+            this.message = {
+              type: 'is-danger',
+              content: `response.login.${result.code}`,
+            };
+            break;
+          default:
+            this.message = {
+              type: 'is-danger',
+              content: 'response.unknown-error',
+            };
         }
       }
+    },
+    toggleLoginModal() {
+      this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+    },
+    signUpSuccess(code) {
+      this.message = {
+        type: 'is-success',
+        content: `response.signup.${code}`,
+      };
     },
   },
 };

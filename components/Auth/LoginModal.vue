@@ -43,12 +43,14 @@
             </ul>
           </div>
           <FormTab
+            ref="loginForm"
             :class="{ hidden: !isTabHidden('login') }"
             form-type="login"
           />
           <FormTab
             :class="{ hidden: !isTabHidden('signup') }"
             form-type="signup"
+            @signup-success="signUpSuccess"
           />
         </div>
       </div>
@@ -104,6 +106,10 @@ export default {
     },
     switchTab(tab) {
       this.tabActive = tab;
+    },
+    signUpSuccess(code) {
+      this.switchTab('login');
+      this.$refs.loginForm.signUpSuccess(code);
     },
     onClickOutside() {
       if (this.isActive) {

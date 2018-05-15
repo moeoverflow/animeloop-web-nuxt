@@ -56,7 +56,7 @@ export default {
       return this.$store.state.auth.authUser;
     },
     isLogin() {
-      return this.user !== null;
+      return this.user !== null && this.user !== undefined;
     },
     emailHash() {
       if (!this.isLogin) {
