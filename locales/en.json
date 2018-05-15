@@ -56,7 +56,7 @@
       "1440001": "Verification code was empty, please provide a correct one.",
       "1440002": "Verification code was invalid, please provide a correct one."
     },
-    "comoon": {
+    "common": {
       "1940101": "Google reCAPTCHA verification failed, please try again.",
       "1950301": "Internal server error."
     }

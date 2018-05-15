@@ -119,7 +119,7 @@ export default {
         username: '',
         email: '',
         password: '',
-        gRecaptchaResponse: 's',
+        gRecaptchaResponse: '',
       },
       submiting: false,
     };
@@ -209,11 +209,16 @@ export default {
           case 1140005:
           case 1140006:
             this.formData.email = '';
-          case 1940101:
           case 1140901:
             this.message = {
               type: 'is-danger',
               content: `response.signup.${result.code}`,
+            };
+            break;
+          case 1940101:
+            this.message = {
+              type: 'is-danger',
+              content: `response.common.${result.code}`,
             };
             break;
           default:
@@ -244,11 +249,16 @@ export default {
             break;
           case 1240101:
             this.formData.password = '';
+            this.message = {
+              type: 'is-danger',
+              content: `response.login.${result.code}`,
+            };
+            break;
           case 1940101:
           case 1950301:
             this.message = {
               type: 'is-danger',
-              content: `response.login.${result.code}`,
+              content: `response.common.${result.code}`,
             };
             break;
           default:
