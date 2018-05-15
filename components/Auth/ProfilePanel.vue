@@ -9,7 +9,10 @@
       <FontAwesomeIcon :icon="icon.faTachometerAlt"/>
       Dashboard
     </a>
-    <a class="dropdown-item">
+    <a
+      class="dropdown-item"
+      @click="logout"
+    >
       <FontAwesomeIcon :icon="icon.faSignOutAlt"/>
       Logout
     </a>
@@ -49,6 +52,12 @@ export default {
     },
   },
   methods: {
+    async logout() {
+      const result = await this.$store.dispatch('logout');
+      if (result.code === 1220002) {
+        this.$store.dispatch('toggleNavbarState', { type: 'profilePanel' });
+      }
+    },
   },
 };
 </script>

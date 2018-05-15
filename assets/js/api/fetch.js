@@ -102,6 +102,11 @@ const remote = {
       'g-recaptcha-response': gRecaptchaResponse,
     },
   }),
+  logout: () => callApi({
+    url: 'auth/logout',
+    method: 'POST',
+    data: {}
+  }),
 };
 
 export default remote;

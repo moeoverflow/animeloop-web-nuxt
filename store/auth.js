@@ -13,7 +13,9 @@ const auth = {
     async login({ commit }, { username, password, gRecaptchaResponse }) {
       try {
         const result = await remote.login(username, password, gRecaptchaResponse);
-        commit('SET_USER', result.data);
+        if (result.status === 'success') {
+          commit('SET_USER', result.data);
+        }
         return result;
       } catch (error) {
         if (error.response && error.response.status === 401) {
@@ -22,6 +24,20 @@ const auth = {
         throw error;
       }
     },
+    async logout({ commit }) {
+      try {
+        const result = await remote.logout();
+        if (result.status === 'success') {
+          commit('SET_USER', null);
+        }
+        return result;
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          throw new Error('Bad credentials');
+        }
+        throw error;
+      }
+    }
   },
 };
 
