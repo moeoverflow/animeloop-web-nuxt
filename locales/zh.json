@@ -32,6 +32,14 @@
   "about-md-file": "about_zh.md",
   "api-md-file": "api_zh.md",
   "language": "中文",
+  "login": "登录",
+  "signup": "注册",
+  "username": "用户名",
+  "email": "电子邮箱",
+  "password": "密码",
+  "forgot-password": "忘记密码？",
+  "dashboard": "仪表板",
+  "logout": "注销",
   "response": {
     "unknown-error": "未知错误。",
     "login": {

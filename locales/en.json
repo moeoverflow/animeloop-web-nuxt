@@ -31,6 +31,14 @@
   "about-md-file": "about_en.md",
   "api-md-file": "api_en.md",
   "language": "English",
+  "login": "Login",
+  "signup": "Sign Up",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "forgot-password": "Forgot password?",
+  "dashboard": "Dashboard",
+  "logout": "Logout",
   "response": {
     "unknown-error": "Unknown error.",
     "login": {

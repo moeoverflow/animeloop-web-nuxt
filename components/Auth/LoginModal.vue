@@ -23,7 +23,7 @@
                   <span class="icon is-small">
                     <FontAwesomeIcon :icon="icon.faUser"/>
                   </span>
-                  <span>Login</span>
+                  <span>{{ $t('login') }}</span>
                 </a>
               </li>
               <li
@@ -37,7 +37,7 @@
                       aria-hidden="true"
                     />
                   </span>
-                  <span>Signup</span>
+                  <span>{{ $t('signup') }}</span>
                 </a>
               </li>
             </ul>

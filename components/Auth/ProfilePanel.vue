@@ -7,14 +7,14 @@
     <hr class="dropdown-divider">
     <a class="dropdown-item">
       <FontAwesomeIcon :icon="icon.faTachometerAlt"/>
-      Dashboard
+      {{ $t('dashboard') }}
     </a>
     <a
       class="dropdown-item"
       @click="logout"
     >
       <FontAwesomeIcon :icon="icon.faSignOutAlt"/>
-      Logout
+      {{ $t('logout') }}
     </a>
   </div>
 </template>

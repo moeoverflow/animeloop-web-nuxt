@@ -8,13 +8,13 @@
       v-show="isShowUsername"
       class="field"
     >
-      <label class="label">Username</label>
+      <label class="label">{{ $t('username') }}</label>
       <div class="control has-icons-left">
         <input
           v-model="formData.username"
+          :placeholder="$t('username')"
           class="input"
           type="text"
-          placeholder="Username"
         >
         <span class="icon is-small is-left">
           <FontAwesomeIcon :icon="icon.faUser"/>
@@ -25,13 +25,13 @@
       v-show="isShowEmail"
       class="field"
     >
-      <label class="label">Email</label>
+      <label class="label">{{ $t('email') }}</label>
       <p class="control has-icons-left">
         <input
           v-model="formData.email"
+          :placeholder="$t('email')"
           class="input"
           type="email"
-          placeholder="Email"
         >
         <span class="icon is-small is-left">
           <FontAwesomeIcon :icon="icon.faEnvelope"/>
@@ -42,13 +42,14 @@
       v-show="isShowPassword"
       class="field"
     >
-      <label class="label">Password</label>
+      <label class="label">{{ $t('password') }}</label>
       <p class="control has-icons-left">
         <input
           v-model="formData.password"
+          :placeholder="$t('password')"
           class="input"
           type="password"
-          placeholder="Password">
+        >
         <span class="icon is-small is-left">
           <FontAwesomeIcon :icon="icon.faLock"/>
         </span>
@@ -71,7 +72,7 @@
           class="button is-link is-fullwidth"
           @click="submit"
         >
-          {{ submitTitle }}
+          {{ $t(formType) }}
         </button>
       </p>
     </div>
@@ -79,7 +80,7 @@
       v-show="isShowForgotPassword"
       class="help forgot-password"
     >
-      <a href="#">Forgot password?</a>
+      <a href="#">{{ $t('forgot-password') }}</a>
     </p>
   </div>
 </template>
@@ -142,14 +143,6 @@ export default {
     },
     isSubmiting() {
       return this.submiting ? 'is-loading' : '';
-    },
-    submitTitle() {
-      if (this.formType === 'login') {
-        return 'Login';
-      } else if (this.formType === 'signup') {
-        return 'Sign Up';
-      }
-      return 'None';
     },
     icon() {
       return {
