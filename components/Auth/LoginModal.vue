@@ -43,12 +43,12 @@
             </ul>
           </div>
           <FormTab
+            v-show="isTabHidden('login')"
             ref="loginForm"
-            :class="{ hidden: !isTabHidden('login') }"
             form-type="login"
           />
           <FormTab
-            :class="{ hidden: !isTabHidden('signup') }"
+            v-show="isTabHidden('signup')"
             form-type="signup"
             @signup-success="signUpSuccess"
           />
@@ -82,7 +82,19 @@ export default {
   },
   data() {
     return {
-      tabActive: 'login',
+      /*
+      * tabActive init
+      * when url hash in the browser is #login or #signup,
+      * open the loginModal, and switch tab.
+      * */
+      tabActive: (() => {
+        const { hash } = this.$router.history.current;
+        if (hash === '#login' || hash === '#signup') {
+          this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+          return hash.replace('#', '');
+        }
+        return 'login';
+      })(),
     };
   },
   computed: {
@@ -96,7 +108,21 @@ export default {
       return this.$store.state.navbar;
     },
   },
-
+  mounted() {
+    /*
+    * when url hash in the browser changed to #login or #signup,
+    * open the loginModal if not, and switch tab.
+    * */
+    window.onhashchange = () => {
+      const { hash } = this.$router.history.current;
+      if (hash === '#login' || hash === '#signup') {
+        if (!this.navStates.loginModalOpen) {
+          this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+        }
+        this.tabActive = hash.replace('#', '');
+      }
+    };
+  },
   methods: {
     isTabActive(tab) {
       return tab === this.tabActive;
@@ -106,6 +132,13 @@ export default {
     },
     switchTab(tab) {
       this.tabActive = tab;
+
+      /*
+      * when user switch loginModal tab,
+      * change url hash in the browser.
+      * */
+      const route = this.$router.currentRoute;
+      this.$router.replace({ name: route.name, path: route.path, hash: `#${tab}` });
     },
     signUpSuccess(code) {
       this.switchTab('login');
@@ -114,6 +147,13 @@ export default {
     onClickOutside() {
       if (this.isActive) {
         this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+
+        /*
+        * when user close loginModal,
+        * remove url hash in the browser.
+        * */
+        const route = this.$router.currentRoute;
+        this.$router.replace({ name: route.name, path: route.path, hash: '' });
       }
     },
   },

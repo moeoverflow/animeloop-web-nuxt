@@ -74,6 +74,17 @@ export default {
     toggleAvatar() {
       if (!this.isLogin) {
         this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+
+        /*
+        * when user open or close loginModal,
+        * change url hash in the browser.
+        * */
+        const route = this.$router.currentRoute;
+        if (this.navStates.loginModalOpen) {
+          this.$router.replace({ name: route.name, path: route.path, hash: '#login' });
+        } else {
+          this.$router.replace({ name: route.name, path: route.path, hash: '' });
+        }
       } else {
         this.$store.dispatch('toggleNavbarState', { type: 'profilePanel' });
       }
