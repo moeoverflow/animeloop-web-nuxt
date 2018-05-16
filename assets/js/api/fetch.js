@@ -105,7 +105,7 @@ const remote = {
   logout: () => callApi({
     url: 'auth/logout',
     method: 'POST',
-    data: {}
+    data: {},
   }),
 };
 

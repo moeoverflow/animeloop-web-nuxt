@@ -37,7 +37,7 @@ const auth = {
         }
         throw error;
       }
-    }
+    },
   },
 };
 
