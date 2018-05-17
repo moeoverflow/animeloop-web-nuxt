@@ -43,12 +43,12 @@
             </ul>
           </div>
           <FormTab
-            v-show="isTabHidden('login')"
+            v-show="isTabShow('login')"
             ref="loginForm"
             form-type="login"
           />
           <FormTab
-            v-show="isTabHidden('signup')"
+            v-show="isTabShow('signup')"
             form-type="signup"
             @signup-success="signUpSuccess"
           />
@@ -80,23 +80,6 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      /*
-      * tabActive init
-      * when url hash in the browser is #login or #signup,
-      * open the loginModal, and switch tab.
-      * */
-      tabActive: (() => {
-        const { hash } = this.$router.history.current;
-        if (hash === '#login' || hash === '#signup') {
-          this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
-          return hash.replace('#', '');
-        }
-        return 'login';
-      })(),
-    };
-  },
   computed: {
     icon() {
       return {
@@ -106,6 +89,9 @@ export default {
     },
     navStates() {
       return this.$store.state.navbar;
+    },
+    tabActive() {
+      return this.navStates.loginFormTab;
     },
   },
   mounted() {
@@ -119,19 +105,30 @@ export default {
         if (!this.navStates.loginModalOpen) {
           this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
         }
-        this.tabActive = hash.replace('#', '');
+        this.$store.dispatch('switchLoginFormTab', { tab: hash.replace('#', '') });
       }
     };
+
+    /*
+    * tabActive init
+    * when url hash in the browser is #login or #signup,
+    * open the loginModal, and switch tab.
+    * */
+    const { hash } = this.$router.history.current;
+    if (hash === '#login' || hash === '#signup') {
+      this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
+      this.$store.dispatch('switchLoginFormTab', { tab: hash.replace('#', '') });
+    }
   },
   methods: {
     isTabActive(tab) {
       return tab === this.tabActive;
     },
-    isTabHidden(tab) {
+    isTabShow(tab) {
       return tab === this.tabActive;
     },
     switchTab(tab) {
-      this.tabActive = tab;
+      this.$store.dispatch('switchLoginFormTab', { tab });
 
       /*
       * when user switch loginModal tab,
@@ -140,8 +137,10 @@ export default {
       const route = this.$router.currentRoute;
       this.$router.replace({ name: route.name, path: route.path, hash: `#${tab}` });
     },
-    signUpSuccess(code) {
+    signUpSuccess({ username, password, code }) {
       this.switchTab('login');
+      this.$refs.loginForm.formData.username = username;
+      this.$refs.loginForm.formData.password = password;
       this.$refs.loginForm.signUpSuccess(code);
     },
     onClickOutside() {

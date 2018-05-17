@@ -46,11 +46,6 @@ export default {
     ProfilePanel,
     Gravatar,
   },
-  data() {
-    return {
-      avatarOn: false,
-    };
-  },
   computed: {
     user() {
       return this.$store.state.auth.authUser;

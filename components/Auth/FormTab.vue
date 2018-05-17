@@ -59,6 +59,7 @@
       v-show="isShowRecaptcha"
       class="field">
       <VueRecaptcha
+        ref="recaptcha"
         sitekey="6Le7LFIUAAAAAHEoYQAM3k9P_lNSKKcT5emrZmim"
         @verify="onVerify"
         @expired="onExpired"
@@ -187,11 +188,15 @@ export default {
         this.submiting = false;
         switch (result.code) {
           case 1120001:
+            this.$emit('signup-success', {
+              username: this.formData.username,
+              password: this.formData.password,
+              code: result.code,
+            });
             this.formData.username = '';
             this.formData.email = '';
             this.formData.password = '';
-
-            this.$emit('signup-success', result.code);
+            this.$refs.recaptcha.reset();
             break;
           case 1140001:
           case 1140002:
@@ -202,16 +207,11 @@ export default {
           case 1140005:
           case 1140006:
             this.formData.email = '';
+          case 1940101:
           case 1140901:
             this.message = {
               type: 'is-danger',
-              content: `response.signup.${result.code}`,
-            };
-            break;
-          case 1940101:
-            this.message = {
-              type: 'is-danger',
-              content: `response.common.${result.code}`,
+              content: `response.${result.code}`,
             };
             break;
           default:
@@ -233,25 +233,17 @@ export default {
         switch (result.code) {
           case 1220001:
             this.toggleLoginModal();
-            break;
-          case 1240102:
-            this.message = {
-              type: 'is-warning',
-              content: `response.login.${result.code}`,
-            };
-            break;
-          case 1240101:
-            this.formData.password = '';
-            this.message = {
-              type: 'is-danger',
-              content: `response.login.${result.code}`,
-            };
+            this.username = '';
+            this.password = '';
+            this.$refs.recaptcha.reset();
             break;
           case 1940101:
-          case 1950301:
+          case 1940104:
+          case 1940105:
+          case 1940106:
             this.message = {
               type: 'is-danger',
-              content: `response.common.${result.code}`,
+              content: `response.${result.code}`,
             };
             break;
           default:
@@ -268,7 +260,7 @@ export default {
     signUpSuccess(code) {
       this.message = {
         type: 'is-success',
-        content: `response.signup.${code}`,
+        content: `response.${code}`,
       };
     },
   },

@@ -6,6 +6,7 @@ const navbar = {
     searchOpen: false,
     langOpen: false,
     loginModalOpen: false,
+    loginFormTab: 'login',
     profilePanelOpen: false,
   }),
 
@@ -16,6 +17,9 @@ const navbar = {
     TOGGLE_NAVBAR_STATE: (state, { type }) => {
       // Vue.set(state, type, !state[type]);
       state[type] = !state[type];
+    },
+    SWITCH_LOGIN_FORM_TAB: (state, tab) => {
+      state.loginFormTab = tab;
     },
   },
 
@@ -34,6 +38,9 @@ const navbar = {
       } else {
         throw Error('Wrong toggle type');
       }
+    },
+    switchLoginFormTab({ commit }, { tab }) {
+      commit('SWITCH_LOGIN_FORM_TAB', tab);
     },
   },
 };
