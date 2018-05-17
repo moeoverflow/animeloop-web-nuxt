@@ -196,7 +196,6 @@ export default {
             this.formData.username = '';
             this.formData.email = '';
             this.formData.password = '';
-            this.$refs.recaptcha.reset();
             break;
           case 1140001:
           case 1140002:
@@ -235,7 +234,6 @@ export default {
             this.toggleLoginModal();
             this.username = '';
             this.password = '';
-            this.$refs.recaptcha.reset();
             break;
           case 1940101:
           case 1940104:
@@ -253,6 +251,7 @@ export default {
             };
         }
       }
+      this.$refs.recaptcha.reset();
     },
     toggleLoginModal() {
       this.$store.dispatch('toggleNavbarState', { type: 'loginModal' });
