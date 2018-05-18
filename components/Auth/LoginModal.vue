@@ -160,13 +160,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "~bulma/sass/utilities/_all";
-  @import "~bulma/sass/elements/image";
-  @import "~bulma/sass/elements/box";
-  @import "~bulma/sass/elements/button";
-  @import "~bulma/sass/components/modal";
-  @import "~bulma/sass/components/tabs";
-
   .modal-content {
     width: 440px;
   }

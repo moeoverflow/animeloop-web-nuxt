@@ -63,10 +63,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "~bulma/sass/utilities/_all";
-  @import "~bulma/sass/elements/image";
-  @import "~bulma/sass/components/dropdown";
-
   .NavbarAvatar {
     margin-left: 1rem;
   }

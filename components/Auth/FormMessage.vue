@@ -43,9 +43,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "~bulma/sass/utilities/_all";
-  @import "~bulma/sass/components/message";
-
   .message-header {
     border-radius: 4px;
     margin-bottom: 1rem;
