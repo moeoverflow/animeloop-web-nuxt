@@ -1,7 +1,7 @@
 <template>
   <nav
     :style="toggleContainerStyle"
-    class="Navbar z-10"
+    class="Navbar"
   >
     <NavbarBurgerMenu />
     <NavbarTitle v-if="!navStates.searchOpen"/>
@@ -50,8 +50,11 @@ export default {
 
 <style scoped lang="postcss">
 /** @define Navbar */
+@import "~/assets/css/mediaqueries.css";
 
 .Navbar {
+  z-index: 10;
+
   grid-area: nav;
   position: fixed;
   top: 0;
@@ -70,14 +73,14 @@ export default {
   display: flex;
   align-items: center;
 
-  @screen tablet {
+  @media (--tablet-screen) {
     /* margin: 2em 2em; */
     padding: 0 2em;
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
-  @screen phone {
+  @media (--phone-screen) {
     flex-wrap: nowrap;
 
     /* &::after {
@@ -94,7 +97,7 @@ export default {
 
 .Navbar-lineBreak {
   display: none;
-  @screen tablet {
+  @media (--tablet-screen) {
     display: block;
   }
   content: "";
