@@ -31,5 +31,13 @@
   "title-key-3": "title_english",
   "about-md-file": "about_jp.md",
   "api-md-file": "api_jp.md",
-  "language": "日本語"
+  "language": "日本語",
+  "login": "ログイン",
+  "signup": "登録",
+  "username": "ユーザID",
+  "email": "メールアドレス",
+  "password": "パスワード",
+  "forgot-password": "わすれた",
+  "dashboard": "ダッシュボード",
+  "logout": "ログアウト"
 }

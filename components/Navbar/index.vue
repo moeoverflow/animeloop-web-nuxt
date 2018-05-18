@@ -8,6 +8,7 @@
     <NavbarEntry />
     <NavbarSearch />
     <NavbarLangMenu v-if="!navStates.searchOpen"/>
+    <NavbarAvatar/>
     <div class="Navbar-lineBreak" />
   </nav>
 </template>
@@ -18,6 +19,7 @@ import NavbarLangMenu from './LangMenu';
 import NavbarBurgerMenu from './Menu';
 import NavbarSearch from './Search';
 import NavbarTitle from './Title';
+import NavbarAvatar from './Avatar';
 
 /**
  * The Navbar component.
@@ -30,6 +32,7 @@ export default {
     NavbarBurgerMenu,
     NavbarSearch,
     NavbarTitle,
+    NavbarAvatar,
   },
   data() {
     return {

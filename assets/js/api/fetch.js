@@ -24,7 +24,10 @@ function encodeFormData(data) {
 async function callApi(request) {
   const init = {
     method: request.method || 'GET',
-    headers: {},
+    headers: {
+    },
+    credentials: 'include',
+    mode: 'cors',
   };
   const hasBody = !((init.method === 'GET') || (init.method === 'HEAD'));
 
@@ -78,6 +81,31 @@ const remote = {
       season, type,
       // Avoid request being blocked by uBlock
     },
+  }),
+  // Auth API
+  signup: (username, email, password, gRecaptchaResponse) => callApi({
+    url: 'auth/register',
+    method: 'POST',
+    data: {
+      username,
+      email,
+      password,
+      'g-recaptcha-response': gRecaptchaResponse,
+    },
+  }),
+  login: (username, password, gRecaptchaResponse) => callApi({
+    url: 'auth/login',
+    method: 'POST',
+    data: {
+      username,
+      password,
+      'g-recaptcha-response': gRecaptchaResponse,
+    },
+  }),
+  logout: () => callApi({
+    url: 'auth/logout',
+    method: 'POST',
+    data: {},
   }),
 };
 

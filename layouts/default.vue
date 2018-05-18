@@ -24,7 +24,7 @@ export default {
         lang: this.langAttr,
       },
       meta: [
-        { hid: 'og:title', name: 'og:title', content: 'Animeloop Beta' },
+        { hid: 'og:title', name: 'og:title', content: 'Animeloop' },
         { hid: 'og:image', name: 'og:image', content: ogIcon },
         { hid: 'og:description', property: 'og:description', content: 'Animeloop Web Frontend' },
       ],
