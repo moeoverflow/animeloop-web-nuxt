@@ -83,6 +83,7 @@ module.exports = {
     '~/plugins/i18n.js',
     '~/plugins/cookies.js',
     '~/plugins/font-awesome.js',
+    '~/plugins/element-ui.js',
     { src: '~/plugins/v-click-outside', ssr: false },
   ],
 
