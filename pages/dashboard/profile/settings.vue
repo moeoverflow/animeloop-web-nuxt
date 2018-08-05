@@ -72,7 +72,6 @@
               shadow="never">
               <img
                 ref="avatarImage"
-                :onload="avatarImageOnLoad"
                 :src="avatarUrl"
                 class="image">
             </el-card>
@@ -81,7 +80,7 @@
               :with-credentials="true"
               :before-upload="beforeAvatarUpload"
               :on-success="onAvatarUploadSucess"
-              :on-erro="onAvatarUploadError"
+              :on-error="onAvatarUploadError"
               :show-file-list="false"
               :limit="1"
               accept="image/*"
@@ -179,7 +178,7 @@ export default {
   },
   computed: {
     avatarUrl() {
-      return this.user.avatar ? `http://127.0.0.1:7775/files${this.user.avatar}` : '//animeloop.org/files/web/default_avatar.jpg';
+      return this.user.avatar ? `/files${this.user.avatar}` : '//animeloop.org/files/web/default_avatar.jpg';
     },
     user() {
       return this.$store.state.profile.userInfo;
@@ -210,15 +209,21 @@ export default {
       const isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
+        this.uploadAvatarLoading = false;
+        this.$message.error(this.$t('settings.upload-avatar-tip'));
       }
       return isLt2M;
     },
     onAvatarUploadSucess(res) {
       this.$store.commit('SET_USER_AVATAR', `${res.data.avatar}?date=${new Date()}`);
       this.uploadAvatarLoading = false;
+      if (res.data.status === 'success') {
+        this.$message.success(this.$t(`response.${res.data.code}`));
+      } else {
+        this.$message.error(this.$t(`response.${res.data.code}`));
+      }
     },
-    onAvatarUploadError(err) {
+    onAvatarUploadError() {
       this.uploadAvatarLoading = false;
     },
   },
@@ -233,12 +238,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-  .DashboardPage {
-
-    background-color: #6EA080;
-  }
-
+<style lang="postcss">
   .profile-form {
     max-width: 600px;
   }
