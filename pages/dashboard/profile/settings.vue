@@ -76,6 +76,7 @@
                 class="image">
             </el-card>
             <el-upload
+              ref="uploadAvatar"
               :action="`${apiBaseUrl}profile/upload-new-avatar`"
               :with-credentials="true"
               :before-upload="beforeAvatarUpload"
@@ -217,11 +218,12 @@ export default {
     onAvatarUploadSucess(res) {
       this.$store.commit('SET_USER_AVATAR', `${res.data.avatar}?date=${new Date()}`);
       this.uploadAvatarLoading = false;
-      if (res.data.status === 'success') {
-        this.$message.success(this.$t(`response.${res.data.code}`));
+      if (res.status === 'success') {
+        this.$message.success(this.$t(`response.${res.code}`));
       } else {
-        this.$message.error(this.$t(`response.${res.data.code}`));
+        this.$message.error(this.$t(`response.${res.code}`));
       }
+      this.$refs.uploadAvatar.clearFiles();
     },
     onAvatarUploadError() {
       this.uploadAvatarLoading = false;
