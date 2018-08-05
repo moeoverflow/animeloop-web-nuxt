@@ -10,10 +10,7 @@
             class="image is-32x32 avatar"
             @click="toggleAvatar"
           >
-            <Gravatar
-              :hash="emailHash"
-              default-img="https://animeloop.org/files/web/default_avatar.jpg"
-            />
+            <img :src="avatarImage">
           </figure>
         </div>
         <div
@@ -49,6 +46,12 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.authUser;
+    },
+    userInfo() {
+      return this.$store.state.profile.userInfo;
+    },
+    avatarImage() {
+      return this.user ? `/files${this.userInfo.avatar}?date=${new Date()}` : '//animeloop.org/files/web/default_avatar.jpg';
     },
     isLogin() {
       return this.user !== null && this.user !== undefined;
