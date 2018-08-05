@@ -58,6 +58,7 @@
   "response": {
     "unknown-error": "Unknown error.",
     "__profile/settings__": "-------------------------",
+    "update-userinfo-failed": "Update userinfo failed.",
     "1520001": "Fetch user info successfully",
     "1520002": "Update userinfo successfully",
     "1520003": "Upload new avatar successfully.",
