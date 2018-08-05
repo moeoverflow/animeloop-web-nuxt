@@ -51,7 +51,7 @@ export default {
       return this.$store.state.profile.userInfo;
     },
     avatarImage() {
-      return this.user ? `/files${this.userInfo.avatar}?date=${new Date()}` : '//animeloop.org/files/web/default_avatar.jpg';
+      return this.user ? `/files${this.userInfo.avatar}` : '//animeloop.org/files/web/default_avatar.jpg';
     },
     isLogin() {
       return this.user !== null && this.user !== undefined;
