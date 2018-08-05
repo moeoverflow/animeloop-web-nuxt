@@ -27,11 +27,11 @@ const createStore = () => new Vuex.Store({
   },
   actions: {
     async nuxtServerInit({ commit }, {
-      req, store, error, isServer,
+      req, store, error,
     }) {
       if (req.session && req.session.authUser) {
         commit('SET_USERAUTH', req.session.authUser);
-        const headers = isServer ? req.headers : null;
+        const headers = process.server ? req.headers : null;
         try {
           await store.dispatch('fetchUserInfo', { headers });
         } catch (err) {
