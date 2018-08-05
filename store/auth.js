@@ -5,7 +5,7 @@ const auth = {
     authUser: null,
   }),
   mutations: {
-    SET_USER(state, data) {
+    SET_USERAUTH(state, data) {
       state.authUser = data;
     },
   },
@@ -14,7 +14,7 @@ const auth = {
       try {
         const result = await remote.login(username, password, gRecaptchaResponse);
         if (result.status === 'success') {
-          commit('SET_USER', result.data);
+          commit('SET_USERAUTH', result.data);
         }
         return result;
       } catch (error) {
@@ -28,7 +28,7 @@ const auth = {
       try {
         const result = await remote.logout();
         if (result.status === 'success') {
-          commit('SET_USER', null);
+          commit('SET_USERAUTH', null);
         }
         return result;
       } catch (error) {

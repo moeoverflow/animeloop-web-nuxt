@@ -9,6 +9,7 @@ import episode from './episode';
 import search from './search';
 import navbar from './navbar';
 import auth from './auth';
+import profile from './profile';
 
 const createStore = () => new Vuex.Store({
   state: () => ({
@@ -22,11 +23,12 @@ const createStore = () => new Vuex.Store({
     i18n,
     navbar,
     auth,
+    profile,
   },
   actions: {
     nuxtServerInit({ commit }, { req }) {
       if (req.session && req.session.authUser) {
-        commit('SET_USER', req.session.authUser);
+        commit('SET_USERAUTH', req.session.authUser);
       }
     },
   },
