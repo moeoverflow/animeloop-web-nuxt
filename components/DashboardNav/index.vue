@@ -8,14 +8,14 @@
       <el-menu-item index="/dashboard">
         <i class="el-icon-"><FontAwesomeIcon :icon="icon.faHome"/></i>
         <span slot="title">
-          Dashboard
+          {{ $t('dashboard') }}
         </span>
       </el-menu-item>
       <el-submenu index="/dashboard">
         <template slot="title">
           <i class="el-icon-"><FontAwesomeIcon :icon="icon.faUserAlt"/></i>
           <span>
-            Profile
+            {{ $t('dashboard-menu.profile') }}
           </span>
         </template>
         <el-menu-item-group>
@@ -24,12 +24,12 @@
             index="/dashboard/profile/settings"
           >
             <span>
-              Settings
+              {{ $t('dashboard-menu.settings') }}
             </span>
           </el-menu-item>
           <el-menu-item index="/dashboard/profile/api">
             <span>
-              API
+              {{ $t('dashboard-menu.api') }}
             </span>
           </el-menu-item>
         </el-menu-item-group>
@@ -38,18 +38,18 @@
         <template slot="title">
           <i class="el-icon-"><FontAwesomeIcon :icon="icon.faImages"/></i>
           <span>
-            GIFs
+            {{ $t('dashboard-menu.gifs') }}
           </span>
         </template>
         <el-menu-item-group>
           <el-menu-item index="/dashboard/gifs/loop">
             <span>
-              Loop
+              {{ $t('dashboard-menu.loop') }}
             </span>
           </el-menu-item>
           <el-menu-item index="/dashboard/gifs/collection">
             <span>
-              Collection
+              {{ $t('dashboard-menu.collection') }}
             </span>
           </el-menu-item>
         </el-menu-item-group>

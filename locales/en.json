@@ -14,6 +14,26 @@
     "random": "Random",
     "api": "API"
   },
+  "dashboard": {
+    "menu": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "api": "API",
+      "gifs": "GIFs",
+      "loop": "Loop",
+      "collection": "Collection"
+    },
+    "profile": {
+      "settings": {
+        "input-new-password": "Input new password",
+        "verify-new-password": "Verify new passwod",
+        "update-profile": "Update profile",
+        "profile-picture": "Profile picture",
+        "upload-new-avatar": "Upload new avatar",
+        "upload-avatar-tip": "image files with a size less than 2mb"
+      }
+    }
+  },
   "home": "Home",
   "list": "List",
   "series": "Series",
@@ -41,6 +61,10 @@
   "logout": "Logout",
   "response": {
     "unknown-error": "Unknown error.",
+    "__profile/settings__": "-------------------------",
+    "1520001": "Fetch user info successfully",
+    "1520002": "Update userinfo successfully",
+    "1520003": "Upload new avatar successfully.",
     "__signup__": "-------------------------",
     "1120001": "Register account successfully. We have sent a verification link to the email address you used to create the account. Please verify your email address in time.",
     "1140001": "Username is empty, please input a correct one.",

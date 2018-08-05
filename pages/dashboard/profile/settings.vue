@@ -19,14 +19,14 @@
               :value="user.uid"
               disabled/>
           </el-form-item>
-          <el-form-item label="Username">
+          <el-form-item :label="$t('username')">
             <el-input
               :value="user.username"
               disabled/>
           </el-form-item>
           <hr>
           <el-form-item
-            label="Email"
+            :label="$t('email')"
             prop="email"
           >
             <el-input
@@ -37,7 +37,7 @@
           </el-form-item>
           <hr>
           <el-form-item
-            label="Input new password"
+            :label="$t('settings.input-new-password')"
             prop="pass">
             <el-input
               v-model="profileForm.pass"
@@ -45,7 +45,7 @@
               auto-complete="off"/>
           </el-form-item>
           <el-form-item
-            label="Verify new password"
+            :label="$t('settings.verify-new-password')"
             prop="checkPass">
             <el-input
               v-model="profileForm.checkPass"
@@ -55,7 +55,7 @@
           <el-form-item>
             <el-button
               type="primary"
-              @click="onSubmit('profileForm')">Update Profile</el-button>
+              @click="onSubmit('profileForm')">{{ $t('settings.update-profile') }}</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -64,7 +64,7 @@
       </el-col>
       <el-col :span="6">
         <el-form label-position="top">
-          <el-form-item label="Profile picture">
+          <el-form-item :label="$t('settings.profile-picture')">
             <el-card
               v-loading="uploadAvatarLoading"
               :body-style="{ padding: '0px' }"
@@ -92,10 +92,10 @@
               <el-button
                 slot="trigger"
                 size="small"
-                type="primary">Upload new avatar</el-button>
+                type="primary">{{ $t('settings.upload-new-avatar') }}</el-button>
               <div
                 slot="tip"
-                class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                class="el-upload__tip">{{ $t('settings.upload-avatar-tip') }}</div>
             </el-upload>
           </el-form-item>
         </el-form>
@@ -193,12 +193,12 @@ export default {
       this.updateUserInfoLoading = true;
       this.$refs[formName].validate(async (valid) => {
         if (!valid) {
-          this.$message.error('Update user info failed.');
+          this.$message.error(this.$t('response.update-userinfo-failed'));
         } else {
           const { email, pass } = this.profileForm;
           const result = await remote.updateUserInfo(email, pass);
           if (result.status === 'success') {
-            this.$message.success('Update user info success.');
+            this.$message.success(this.$t(`response.${result.code}`));
           }
         }
         this.updateUserInfoLoading = false;
