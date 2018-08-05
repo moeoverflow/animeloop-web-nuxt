@@ -13,7 +13,7 @@ export default {
   middleware: [isLogin],
   head() {
     return {
-      title: `${this.$t('about')} | Animeloop`,
+      title: `${this.$t('dashboard')} | Animeloop`,
     };
   },
 };

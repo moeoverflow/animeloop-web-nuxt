@@ -115,7 +115,7 @@ export default {
   middleware: [isLogin],
   head() {
     return {
-      title: `${this.$t('settings')} | Animeloop`,
+      title: `${this.$t('dashboard-menu.settings')} | Animeloop`,
     };
   },
   data() {
