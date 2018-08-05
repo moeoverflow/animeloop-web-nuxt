@@ -47,9 +47,8 @@ export default {
 };
 </script>
 
-<style src="~/node_modules/element-ui/lib/theme-chalk/index.css"></style>
-
 <style lang="postcss">
+  @import "~/node_modules/element-ui/lib/theme-chalk/index.css";
   @import "~/assets/css/mediaqueries.css";
 
   .el-header {
