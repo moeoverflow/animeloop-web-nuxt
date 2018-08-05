@@ -14,25 +14,21 @@
     "random": "Random",
     "api": "API"
   },
-  "dashboard": {
-    "menu": {
-      "profile": "Profile",
-      "settings": "Settings",
-      "api": "API",
-      "gifs": "GIFs",
-      "loop": "Loop",
-      "collection": "Collection"
-    },
-    "profile": {
-      "settings": {
-        "input-new-password": "Input new password",
-        "verify-new-password": "Verify new passwod",
-        "update-profile": "Update profile",
-        "profile-picture": "Profile picture",
-        "upload-new-avatar": "Upload new avatar",
-        "upload-avatar-tip": "image files with a size less than 2mb"
-      }
-    }
+  "dashboard-menu": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "api": "API",
+    "gifs": "GIFs",
+    "loop": "Loop",
+    "collection": "Collection"
+  },
+  "settings": {
+    "input-new-password": "Input new password",
+    "verify-new-password": "Verify new passwod",
+    "update-profile": "Update profile",
+    "profile-picture": "Profile picture",
+    "upload-new-avatar": "Upload new avatar",
+    "upload-avatar-tip": "image files with a size less than 2mb"
   },
   "home": "Home",
   "list": "List",
