@@ -1,4 +1,10 @@
 {
+  "common": {
+    "sure": "Sure",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
   "loop": {
     "downloads": "Downloads",
     "timestamps": "Timestamps",
@@ -29,6 +35,15 @@
     "profile-picture": "Profile picture",
     "upload-new-avatar": "Upload new avatar",
     "upload-avatar-tip": "image files with a size less than 2mb"
+  },
+  "apii": {
+    "id": "ID",
+    "name": "Name",
+    "token": "Token",
+    "actions": "Actions",
+    "create-token": "Create Token",
+    "how-to-use": "How to use?",
+    "deleteTokenSure": "Are you sure to delete this token?"
   },
   "home": "Home",
   "list": "List",

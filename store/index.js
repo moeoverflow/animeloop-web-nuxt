@@ -10,6 +10,7 @@ import search from './search';
 import navbar from './navbar';
 import auth from './auth';
 import profile from './profile';
+import api from './api';
 
 const createStore = () => new Vuex.Store({
   state: () => ({
@@ -24,6 +25,7 @@ const createStore = () => new Vuex.Store({
     navbar,
     auth,
     profile,
+    api,
   },
   actions: {
     async nuxtServerInit({ commit }, {
@@ -31,11 +33,13 @@ const createStore = () => new Vuex.Store({
     }) {
       if (req.session && req.session.authUser) {
         commit('SET_USERAUTH', req.session.authUser);
-        const headers = process.server ? req.headers : null;
-        try {
-          await store.dispatch('fetchUserInfo', { headers });
-        } catch (err) {
-          error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+        if (!store.state.profile.userInfo) {
+          const headers = process.server ? req.headers : null;
+          try {
+            await store.dispatch('fetchUserInfo', { headers });
+          } catch (err) {
+            error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+          }
         }
       }
     },

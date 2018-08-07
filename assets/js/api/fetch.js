@@ -119,6 +119,22 @@ const remote = {
       newPassword,
     },
   }),
+  fetchUserToken: headers => callApi({
+    url: 'auth/token',
+    headers,
+  }),
+  createNewToken: (data, headers) => callApi({
+    url: 'auth/token/new',
+    method: 'post',
+    headers,
+    data,
+  }),
+  revokeToken: (data, headers) => callApi({
+    url: 'auth/token/revoke',
+    method: 'post',
+    headers,
+    data,
+  }),
 };
 
 export default remote;
