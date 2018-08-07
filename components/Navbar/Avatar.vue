@@ -31,8 +31,6 @@
 /**
  * Login of the Navbar.
  */
-import crypto from 'crypto';
-import Gravatar from 'vue-gravatar';
 import LoginModal from '../Auth/LoginModal';
 import ProfilePanel from '../Auth/ProfilePanel';
 
@@ -41,28 +39,19 @@ export default {
   components: {
     LoginModal,
     ProfilePanel,
-    Gravatar,
   },
   computed: {
     user() {
       return this.$store.state.auth.authUser;
     },
     userInfo() {
-      return this.$store.state.profile.userInfo;
+      return this.isLogin ? this.$store.state.profile.userInfo : null;
     },
     avatarImage() {
-      return this.user ? `/files${this.userInfo.avatar}` : '//animeloop.org/files/web/default_avatar.jpg';
+      return this.isLogin ? `/files${this.userInfo.avatar}` : '//animeloop.org/files/web/default_avatar.jpg';
     },
     isLogin() {
       return this.user !== null && this.user !== undefined;
-    },
-    emailHash() {
-      if (!this.isLogin) {
-        return '';
-      }
-      const text = this.user.email.toLowerCase();
-      const md5 = crypto.createHash('md5').update(text).digest('hex');
-      return md5;
     },
     navStates() {
       return this.$store.state.navbar;
