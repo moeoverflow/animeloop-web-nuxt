@@ -232,6 +232,7 @@ export default {
         switch (result.code) {
           case 1220001:
             this.toggleLoginModal();
+            this.$nuxt.$router.push({ path: '/dashboard' });
             this.username = '';
             this.password = '';
             break;
