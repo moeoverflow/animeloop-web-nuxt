@@ -6,14 +6,14 @@
     </div>
     <hr class="dropdown-divider">
     <a class="dropdown-item">
-      <FontAwesomeIcon :icon="icon.faTachometerAlt"/>
+      <FontAwesomeIcon icon="tachometer-alt"/>
       {{ $t('dashboard') }}
     </a>
     <a
       class="dropdown-item"
       @click="logout"
     >
-      <FontAwesomeIcon :icon="icon.faSignOutAlt"/>
+      <FontAwesomeIcon icon="sign-out-alt"/>
       {{ $t('logout') }}
     </a>
   </div>
@@ -23,24 +23,14 @@
 /**
  * Profile panel of the Navbar.
  */
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import { faTachometerAlt, faSignOutAlt } from '@fortawesome/fontawesome-free-solid';
-
 export default {
   name: 'NavbarProfilePanel',
   components: {
-    FontAwesomeIcon,
   },
   data() {
     return {};
   },
   computed: {
-    icon() {
-      return {
-        faTachometerAlt,
-        faSignOutAlt,
-      };
-    },
     navStates() {
       return this.$store.state.navbar;
     },

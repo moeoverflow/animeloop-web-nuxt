@@ -21,7 +21,7 @@
               >
                 <a>
                   <span class="icon is-small">
-                    <FontAwesomeIcon :icon="icon.faUser"/>
+                    <FontAwesomeIcon icon="user"/>
                   </span>
                   <span>{{ $t('login') }}</span>
                 </a>
@@ -33,7 +33,7 @@
                 <a>
                   <span class="icon is-small">
                     <FontAwesomeIcon
-                      :icon="icon.faPencilAlt"
+                      icon="pencil-alt"
                       aria-hidden="true"
                     />
                   </span>
@@ -63,15 +63,11 @@
    * Login of the Navbar.
    */
 
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import { faUser, faPencilAlt } from '@fortawesome/fontawesome-free-solid';
-
 import FormTab from './FormTab';
 
 export default {
   name: 'LoginModal',
   components: {
-    FontAwesomeIcon,
     FormTab,
   },
   props: {
@@ -81,12 +77,6 @@ export default {
     },
   },
   computed: {
-    icon() {
-      return {
-        faUser,
-        faPencilAlt,
-      };
-    },
     navStates() {
       return this.$store.state.navbar;
     },

@@ -23,6 +23,13 @@ import {
   faStopwatch,
   faFilter,
   faTerminal,
+  faUser,
+  faLock,
+  faCheck,
+  faEnvelope,
+  faPencilAlt,
+  faTachometerAlt,
+  faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -31,6 +38,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 // };
 
 // eslint-disable-next-line max-len
-library.add(faThList, faTags, faQuestionCircle, faInfo, faArrowRight, faLanguage, faBars, faTimes, faSearch, faAngleDown, faPlay, faPlayCircle, faPause, faPauseCircle, faCircleNotch, faChevronRight, faChevronLeft, faLongArrowAltRight, faLongArrowAltLeft, faStopwatch, faFilter, faTerminal);
+library.add(faThList, faTags, faQuestionCircle, faInfo, faArrowRight, faLanguage, faBars, faTimes, faSearch, faAngleDown, faPlay, faPlayCircle, faPause, faPauseCircle, faCircleNotch, faChevronRight, faChevronLeft, faLongArrowAltRight, faLongArrowAltLeft, faStopwatch, faFilter, faTerminal, faUser, faLock, faCheck, faEnvelope, faUser, faPencilAlt, faTachometerAlt, faSignOutAlt);
 
 Vue.component('FontAwesomeIcon', FontAwesomeIcon);

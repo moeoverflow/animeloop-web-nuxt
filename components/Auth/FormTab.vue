@@ -17,7 +17,7 @@
           type="text"
         >
         <span class="icon is-small is-left">
-          <FontAwesomeIcon :icon="icon.faUser"/>
+          <FontAwesomeIcon icon="user"/>
         </span>
       </div>
     </div>
@@ -34,7 +34,7 @@
           type="email"
         >
         <span class="icon is-small is-left">
-          <FontAwesomeIcon :icon="icon.faEnvelope"/>
+          <FontAwesomeIcon icon="envelope"/>
         </span>
       </p>
     </div>
@@ -51,7 +51,7 @@
           type="password"
         >
         <span class="icon is-small is-left">
-          <FontAwesomeIcon :icon="icon.faLock"/>
+          <FontAwesomeIcon icon="lock"/>
         </span>
       </p>
     </div>
@@ -94,15 +94,12 @@
  */
 import remote from '~/assets/js/api/fetch';
 import VueRecaptcha from 'vue-recaptcha';
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import { faUser, faLock, faCheck, faEnvelope } from '@fortawesome/fontawesome-free-solid';
 import FormMessage from './FormMessage';
 
 export default {
   name: 'LoginTab',
   components: {
     VueRecaptcha,
-    FontAwesomeIcon,
     FormMessage,
   },
   props: {
@@ -145,14 +142,6 @@ export default {
     isSubmiting() {
       return this.submiting ? 'is-loading' : '';
     },
-    icon() {
-      return {
-        faUser,
-        faLock,
-        faCheck,
-        faEnvelope,
-      };
-    },
     isLoginAvaliable() {
       const validUsername = /^[a-zA-Z0-9_-]{5,15}$/.test(this.formData.username);
       const validEmail = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/.test(this.formData.email);
@@ -163,8 +152,9 @@ export default {
         return validgRecaptchaResponse && validUsername && validPassword;
       } else if (this.formType === 'signup') {
         return validgRecaptchaResponse && validUsername && validEmail && validPassword;
+      } else {
+        return false;
       }
-      return false;
     },
   },
   methods: {

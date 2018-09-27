@@ -52,6 +52,7 @@ module.exports = {
     // allow debugger during development
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-else-return': 'off',
 
     // jsdoc
     'jsdoc/check-param-names': 1,
