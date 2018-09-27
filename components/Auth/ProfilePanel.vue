@@ -5,10 +5,14 @@
       <p>Hello, <strong>{{ isLogin ? user.username : 'guest' }}</strong>.</p>
     </div>
     <hr class="dropdown-divider">
-    <a class="dropdown-item">
+    <nuxt-link
+      class="dropdown-item"
+      to="/dashboard"
+      @click.native="goToDashboard"
+    >
       <FontAwesomeIcon icon="tachometer-alt"/>
       {{ $t('dashboard') }}
-    </a>
+    </nuxt-link>
     <a
       class="dropdown-item"
       @click="logout"
@@ -47,6 +51,9 @@ export default {
       if (result.code === 1220002) {
         this.$store.dispatch('toggleNavbarState', { type: 'profilePanel' });
       }
+    },
+    goToDashboard() {
+      this.$store.dispatch('toggleNavbarState', { type: 'profilePanel' });
     },
   },
 };

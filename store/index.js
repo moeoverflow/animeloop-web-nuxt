@@ -9,6 +9,8 @@ import episode from './episode';
 import search from './search';
 import navbar from './navbar';
 import auth from './auth';
+import profile from './profile';
+import api from './api';
 
 const createStore = () => new Vuex.Store({
   state: () => ({
@@ -22,11 +24,23 @@ const createStore = () => new Vuex.Store({
     i18n,
     navbar,
     auth,
+    profile,
+    api,
   },
   actions: {
-    nuxtServerInit({ commit }, { req }) {
+    async nuxtServerInit({ commit }, {
+      req, store, error,
+    }) {
       if (req.session && req.session.authUser) {
-        commit('SET_USER', req.session.authUser);
+        commit('SET_USERAUTH', req.session.authUser);
+        if (!store.state.profile.userInfo) {
+          const headers = process.server ? req.headers : null;
+          try {
+            await store.dispatch('fetchUserInfo', { headers });
+          } catch (err) {
+            error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+          }
+        }
       }
     },
   },

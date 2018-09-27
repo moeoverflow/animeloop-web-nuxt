@@ -1,4 +1,10 @@
 {
+  "common": {
+    "sure": "确定",
+    "ok": "OK",
+    "cancel": "取消",
+    "delete": "删除"
+  },
   "loop": {
     "downloads": "下載",
     "timestamps": "時間段",
@@ -13,6 +19,32 @@
     "tags": "標籤",
     "random": "隨機",
     "api": "API"
+  },
+  "dashboard-menu": {
+    "profile": "个人资料",
+    "settings": "个人设置",
+    "api": "API",
+    "gifs": "GIFs",
+    "loop": "Loop",
+    "collection": "Collection"
+  },
+  "settings": {
+    "input-new-password": "修改新密码",
+    "verify-new-password": "确认新密码",
+    "update-profile": "更新用户信息",
+    "profile-picture": "个人头像",
+    "upload-new-avatar": "上传新头像",
+    "upload-avatar-tip": "只能上传 2MB 以下的图片"
+  },
+  "apii": {
+    "delete": "删除",
+    "id": "ID",
+    "name": "名称",
+    "token": "Token",
+    "actions": "操作",
+    "create-token": "创建 Token",
+    "how-to-use": "如何使用？",
+    "deleteTokenSure": "你确定删除这个 Token 吗？"
   },
   "home": "主頁",
   "list": "分類",
@@ -42,6 +74,11 @@
   "logout": "注销",
   "response": {
     "unknown-error": "未知错误。",
+    "__profile/settings__": "-------------------------",
+    "update-userinfo-failed": "更新用户信息失败。",
+    "1520001": "获取用户信息成功。",
+    "1520002": "更新用户信息成功。",
+    "1520003": "上传新头像成功。",
     "__signup__": "-------------------------",
     "1120001": "账号注册成功。我们已向你的邮箱账号发送了一封验证邮件，请及时验证您的邮箱地址。",
     "1140001": "用户名为空，请输入一个符合要求的用户名。",

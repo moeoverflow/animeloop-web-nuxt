@@ -5,7 +5,7 @@
       :content="message.content"
     />
     <div
-      v-show="isShowUsername"
+      v-if="isShowUsername"
       class="field"
     >
       <label class="label">{{ $t('username') }}</label>
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div
-      v-show="isShowEmail"
+      v-if="isShowEmail"
       class="field"
     >
       <label class="label">{{ $t('email') }}</label>
@@ -39,7 +39,7 @@
       </p>
     </div>
     <div
-      v-show="isShowPassword"
+      v-if="isShowPassword"
       class="field"
     >
       <label class="label">{{ $t('password') }}</label>
@@ -56,7 +56,7 @@
       </p>
     </div>
     <div
-      v-show="isShowRecaptcha"
+      v-if="isShowRecaptcha"
       class="field">
       <VueRecaptcha
         ref="recaptcha"
@@ -78,7 +78,7 @@
       </p>
     </div>
     <p
-      v-show="isShowForgotPassword"
+      v-if="isShowForgotPassword"
       class="help forgot-password"
     >
       <a href="#">{{ $t('forgot-password') }}</a>
@@ -222,6 +222,7 @@ export default {
         switch (result.code) {
           case 1220001:
             this.toggleLoginModal();
+            this.$nuxt.$router.push({ path: '/dashboard' });
             this.username = '';
             this.password = '';
             break;

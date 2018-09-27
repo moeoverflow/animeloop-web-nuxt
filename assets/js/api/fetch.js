@@ -24,8 +24,7 @@ function encodeFormData(data) {
 async function callApi(request) {
   const init = {
     method: request.method || 'GET',
-    headers: {
-    },
+    headers: request.headers || {},
     credentials: 'include',
     mode: 'cors',
   };
@@ -106,6 +105,35 @@ const remote = {
     url: 'auth/logout',
     method: 'POST',
     data: {},
+  }),
+  fetchUserInfo: headers => callApi({
+    url: 'profile/get-userinfo',
+    headers,
+    data: {},
+  }),
+  updateUserInfo: (email, newPassword) => callApi({
+    url: 'profile/update-userinfo',
+    method: 'POST',
+    data: {
+      email,
+      newPassword,
+    },
+  }),
+  fetchUserToken: headers => callApi({
+    url: 'auth/token',
+    headers,
+  }),
+  createNewToken: (data, headers) => callApi({
+    url: 'auth/token/new',
+    method: 'post',
+    headers,
+    data,
+  }),
+  revokeToken: (data, headers) => callApi({
+    url: 'auth/token/revoke',
+    method: 'post',
+    headers,
+    data,
   }),
 };
 
