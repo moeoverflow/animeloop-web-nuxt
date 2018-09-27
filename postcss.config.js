@@ -17,15 +17,23 @@ module.exports = () => ({
     },
     'postcss-url': {},
     // tailwindcss: './tailwind.js',
-    'postcss-cssnext': {
-      browserslist: [
-        '> 1%',
-      ],
+    // 'postcss-cssnext': {
+    //   browserslist: [
+    //     '> 1%',
+    //   ],
+    //   features: {
+    //     customProperties: false,
+    //   },
+    // },
+    'postcss-preset-env': {
+      stage: 3,
       features: {
-        customProperties: false,
+        'color-mod-function': {
+          unresolved: 'warn',
+        },
+        'nesting-rules': true,
       },
     },
-    'postcss-hexrgba': {},
     // 'postcss-bem-linter': {
     //   preset: 'suit',
     //   // implicitComponents: 'src/components#<{(||)}>#*.vue',

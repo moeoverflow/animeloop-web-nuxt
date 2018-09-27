@@ -90,7 +90,8 @@ export default {
     loopList() {
       if (this.pageType === 'episode') {
         return this.$store.state.loop.loopList[this.episodeid];
-      } else if (this.pageType === 'home') {
+      }
+      if (this.pageType === 'home') {
         return this.$store.state.loop.randomLoopList;
       }
       return [];
@@ -103,6 +104,7 @@ export default {
 
 <style scoped lang="postcss">
 /** @define LoopGrid */
+@import '~/assets/css/colors.css';
 
 .LoopGrid {
   display: grid;

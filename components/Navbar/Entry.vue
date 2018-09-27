@@ -31,16 +31,11 @@
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-
 /**
  * Entries of the Navbar.
  */
 export default {
   name: 'NavbarEntry',
-  components: {
-    FontAwesomeIcon,
-  },
   data() {
     return {
       entries: [
@@ -73,6 +68,7 @@ export default {
 
 <style scoped lang="postcss">
 /** @define NavbarEntry */
+@import "~/assets/css/colors.css";
 @import "~/assets/css/mediaqueries.css";
 
 .NavbarEntry {

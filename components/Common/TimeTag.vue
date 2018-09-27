@@ -31,16 +31,11 @@
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-
 /**
  * Time Tag Component for Loop Pages.
  */
 export default {
   name: 'TimeTag',
-  components: {
-    FontAwesomeIcon,
-  },
   props: {
     /**
      * Type of the Time Tag
@@ -85,6 +80,13 @@ export default {
 
 <style scoped lang="postcss">
 /** @define TimeTag */
+@import "~/assets/css/colors.css";
+
+.TimeTag-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
 
 .TimeTag-container {
   display: flex;

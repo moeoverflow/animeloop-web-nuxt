@@ -32,16 +32,11 @@
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-
 /**
  * Search Bar of the Navbar.
  */
 export default {
   name: 'NavbarSearch',
-  components: {
-    FontAwesomeIcon,
-  },
   data() {
     return {
       keyword: '',
@@ -62,7 +57,7 @@ export default {
     },
     searchbarPlaceholder() {
       if (this.keyword) return this.keyword;
-      else if (this.searchFocused) return '';
+      if (this.searchFocused) return '';
       return this.$t('navbar.search');
     },
   },

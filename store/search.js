@@ -1,4 +1,5 @@
 import remote from '~/assets/js/api/fetch';
+// import validate from '~/assets/js/utils/validate';
 
 const search = {
   state: () => ({

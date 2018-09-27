@@ -32,16 +32,11 @@
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-
 /**
  * Language Menu of the Navbar.
  */
 export default {
   name: 'NavbarLangMenu',
-  components: {
-    FontAwesomeIcon,
-  },
   data() {
     return {
       localeList: [
@@ -87,6 +82,7 @@ export default {
 
 <style scoped lang="postcss">
 /** @define NavbarLangMenu */
+@import "~/assets/css/colors.css";
 @import "~/assets/css/mediaqueries.css";
 
 .NavbarLangMenu {
@@ -159,7 +155,7 @@ export default {
 
   &:hover {
     padding: .6em .6em .6em .3em;
-    border-left: .3em solid color(#6683BB alpha(-20%));
+    border-left: .3em solid color-mod(var(--accent-color-light) alpha(0.8));
   }
 }
 

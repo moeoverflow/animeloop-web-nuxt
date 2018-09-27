@@ -34,7 +34,6 @@ module.exports = {
   */
   build: {
     extractCSS: true,
-    vendor: ['vue-i18n', '@fortawesome/vue-fontawesome'],
     /*
     ** Run ESLint on save
     */
@@ -47,6 +46,16 @@ module.exports = {
           exclude: /(node_modules)/,
         });
       }
+      config.module.rules.push({
+        test: /\.(postcss)$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+          },
+        ],
+      });
       if (!isDev) {
         // Remove unused CSS using purgecss. See https://github.com/FullHuman/purgecss
         // for more information about purgecss.
@@ -64,8 +73,6 @@ module.exports = {
   },
 
   css: [
-    '@fortawesome/fontawesome/styles.css',
-    '~/assets/css/colors.css',
     '~/assets/css/bulma-custom.scss',
   ],
 

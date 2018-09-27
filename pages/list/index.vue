@@ -117,13 +117,11 @@
 <script>
 import SeriesGrid from '~/components/Series/Grid';
 import PageIcon from '~/components/Common/PageIcon';
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 
 export default {
   name: 'PageList',
   components: {
     SeriesGrid,
-    FontAwesomeIcon,
     PageIcon,
   },
 
@@ -257,6 +255,7 @@ export default {
 
 <style scoped lang="postcss">
 /** @define ListPage */
+@import '~/assets/css/colors.css';
 @import "~/assets/css/mediaqueries.css";
 
 .ListPage-heading {
