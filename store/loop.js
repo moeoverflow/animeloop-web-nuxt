@@ -18,7 +18,7 @@ const loop = {
     randomPageLoopid: '',
     loopList: {/* [id: episodeid]: loopid */},
     loops: {/* [id: loopid]: Loop */},
-    play: false,
+    play: true,
   }),
 
   mutations: {
