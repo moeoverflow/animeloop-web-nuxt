@@ -108,7 +108,7 @@
 import remote from '~/assets/js/api/fetch';
 
 import isLogin from '~/middleware/is-login';
-import apiPrefix from '~/config';
+import { apiPrefix } from '~/config';
 
 export default {
   name: 'DashboardSettingsPage',

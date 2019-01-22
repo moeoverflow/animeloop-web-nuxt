@@ -9,6 +9,8 @@ const PurgecssPlugin = require('purgecss-webpack-plugin');
 const glob = require('glob-all');
 const path = require('path');
 
+const { sentryDsn } = require('./config');
+
 module.exports = {
   /*
   ** Headers of the page
@@ -104,7 +106,13 @@ module.exports = {
     '@nuxtjs/pwa',
     // Simple usage
     '@nuxtjs/bulma',
+    '@nuxtjs/sentry',
   ],
+
+  sentry: {
+    dsn: sentryDsn,
+    config: {},
+  },
 
   manifest: {
     name: 'Animeloop',

@@ -5,7 +5,7 @@
 import fetch from 'isomorphic-fetch';
 import qs from 'qs';
 
-import apiPrefix from '~/config';
+import { apiPrefix } from '~/config';
 
 const apiBaseUrl = process.client ? apiPrefix.browser : apiPrefix.server;
 
