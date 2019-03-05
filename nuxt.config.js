@@ -116,6 +116,7 @@ module.exports = {
 
   manifest: {
     name: 'Animeloop',
+    author: false,
     short_name: 'Animeloop',
     description: 'Animeloop Web Frontend',
     ogTitle: false,
