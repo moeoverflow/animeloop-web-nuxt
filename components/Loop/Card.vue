@@ -2,8 +2,6 @@
   <section>
     <div
       v-if="loopType === 'mp4'"
-      @mouseover="onHovered()"
-      @mouseout="onUnhovered()"
     >
       <div
         v-if="!canplaythrough"
@@ -119,28 +117,6 @@ export default {
     },
   },
   methods: {
-    /**
-     * When LoopCard is hovered, play the video.
-     *
-     * @event onHovered
-     * @type {Function}
-     */
-    onHovered() {
-      if (!this.hovered) {
-        this.hovered = true;
-        this.$refs.video.play();
-      }
-    },
-    /**
-     * When LoopCard is not hovered, pause the video.
-     *
-     * @event onUnhovered
-     * @type {Function}
-     */
-    onUnhovered() {
-      this.hovered = false;
-      this.$refs.video.pause();
-    },
     /**
      * When video.canplaythrough is fired, show the video.
      *
