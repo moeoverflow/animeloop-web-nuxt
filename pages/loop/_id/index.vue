@@ -46,7 +46,7 @@ export default {
         case 'ja':
           return this.loop.series.titleJA;
         case 'zh':
-          return this.loop.series.title;
+          return this.loop.series.titleCHS || this.series.titleCHT;
         case 'en':
           return this.loop.series.titleEN;
         default:

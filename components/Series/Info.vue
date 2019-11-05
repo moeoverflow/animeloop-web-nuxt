@@ -55,7 +55,7 @@ export default {
         case 'ja':
           return this.series.titleJA;
         case 'zh':
-          return this.series.title;
+          return this.series.titleCHS || this.series.titleCHT;
         case 'en':
           return this.series.titleEN;
         default:
