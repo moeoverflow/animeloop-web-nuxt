@@ -330,10 +330,12 @@ const remote = {
     return { data: data.season };
   },
 
-  getSeriesGroup: async () => {
+  getSeriesGroup: async ({ offset, limit }) => {
+    const offset1 = offset || 0;
+    const limit1 = limit || 50;
     const data = await graphql('http://127.0.0.1:8970/graphql', `
       query getSerieses {
-        serieses {
+        serieses(offset: ${offset1}, limit: ${limit1}) {
           offset
           limit
           count
@@ -357,7 +359,7 @@ const remote = {
         }
       }
     `);
-    return { data: data.serieses.rows };
+    return { data: data.serieses };
   },
   getSeriesCount: async () => {
     const data = await graphql('http://127.0.0.1:8970/graphql', `

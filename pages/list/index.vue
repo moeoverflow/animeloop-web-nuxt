@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="ListPage-filter">
+    <!-- <div class="ListPage-filter">
       <div class="ListPage-select year-selector">
         <select
           v-model="selectedYear"
@@ -52,7 +52,7 @@
           icon="filter"
         />
       </button>
-    </div>
+    </div> -->
     <SeriesGrid
       type="listPage"
     />
@@ -151,7 +151,6 @@ export default {
   async fetch({
     store, query, redirect, error,
   }) {
-    // try {
     if (Object.keys(store.state.series.seasons).length === 0) {
       await store.dispatch('fetchAllSeasons');
     }
@@ -165,22 +164,10 @@ export default {
     const latestYear = Object.keys(seasons)[Object.keys(seasons).length - 1];
     const latestMonth = Math.max(...seasons[latestYear].map(Number));
     const { type = '', season = `${latestYear}-${latestMonth}`, page = 1 } = query;
-    await Promise.all([
-      store.dispatch('fetchSeriesGroup', ({
-        type,
-        season,
-        page,
-        // limit: 30,
-      })),
-      store.dispatch('fetchSeriesCount', ({
-        type,
-        season,
-      })),
-    ]);
-    // } catch (err) {
-    //   error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
-    //   console.log(err);
-    // }
+    await store.dispatch('fetchSeriesGroup', ({
+      offset: (Math.max(0, (query.page ? parseInt(query.page, 10) : 1) - 1)) * 30,
+      limit: 30,
+    }));
   },
 
   computed: {
@@ -189,6 +176,7 @@ export default {
     },
 
     pageCount() {
+      console.log('this.seriesCount', this.seriesCount);
       return Math.ceil(this.seriesCount / 30);
     },
 
@@ -227,18 +215,10 @@ export default {
     },
 
     async fetchNewGroup() {
-      await Promise.all([
-        this.$store.dispatch('fetchSeriesGroup', ({
-          type: this.selectedType,
-          season: this.selectedSeason,
-          page: this.selectedPageNum,
-          // limit: 30,
-        })),
-        this.$store.dispatch('fetchSeriesCount', ({
-          type: this.selectedType,
-          season: this.selectedSeason,
-        })),
-      ]);
+      await this.$store.dispatch('fetchSeriesGroup', ({
+        offset: (Math.min(0, this.selectedPageNum - 1)) * 30,
+        limit: 30,
+      }));
     },
 
     applyFilter() {

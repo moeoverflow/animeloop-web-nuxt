@@ -1,6 +1,5 @@
 // import Vue from 'vue';
 import remote from '~/assets/js/api/fetch';
-import validate from '~/assets/js/utils/validate';
 
 const series = {
   state: () => ({
@@ -59,23 +58,15 @@ const series = {
       commit('SET_SERIES', { seriesid, data });
     },
 
-    async fetchSeriesCount({ commit }, {
-      type, season,
-    }) {
-      const { data } = await remote.getSeriesCount({
-        type, season,
-      });
-      commit('SET_SERIES_COUNT', { data });
-    },
-
     async fetchSeriesGroup({ state, commit, dispatch }, {
-      type, season, page, limit = state.maxSeriesInPage,
+      offset, limit = state.maxSeriesInPage,
     }) {
       const { data } = await remote.getSeriesGroup({
-        type, season, page, limit,
+        offset, limit,
       });
-      commit('SET_SERIES_GROUP', { data });
-      await dispatch('fillSeriesList', { data });
+      commit('SET_SERIES_GROUP', { data: data.rows });
+      commit('SET_SERIES_COUNT', { data });
+      await dispatch('fillSeriesList', { data: data.rows });
     },
 
     async fetchAllSeasons({ commit }) {
