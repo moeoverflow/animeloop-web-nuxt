@@ -8,7 +8,7 @@
       <div class="SeriesPage-cover">
         <nuxt-link :to="{ name: 'series-id', params: { id: seriesid }}">
           <img
-            :src="series.image_url_large"
+            :src="series.cover"
             alt="Cover Art"
           >
         </nuxt-link>
@@ -43,10 +43,10 @@
             >Select Episode...</option>
             <option
               v-for="episode in episodeList"
-              :key="episode.no"
+              :key="episode.id"
               :value="episode.id"
             >
-              {{ episode.no }}
+              {{ episode.index }}
             </option>
           </select>
         </div>
@@ -95,9 +95,7 @@ export default {
     seriesid: {
       type: String,
       required: true,
-      validator(value) {
-        return /^[a-z0-9]{24}$/.test(value);
-      },
+      
     },
     /**
      * `episodeid` of current Episode.
@@ -106,9 +104,6 @@ export default {
       type: String,
       required: false,
       default: '',
-      validator(value) {
-        return /^[a-z0-9]{24}$/.test(value) || value === '';
-      },
     },
     /**
      * The number of episode in current Series.
@@ -117,9 +112,6 @@ export default {
       type: String,
       required: false,
       default: '',
-      validator(value) {
-        return /^[\w]{0,10}$/.test(value) || value === '';
-      },
     },
   },
 
@@ -128,7 +120,7 @@ export default {
     return {
       title: this.metaTitle,
       meta: [
-        { hid: 'og:title', name: 'og:title', content: this.episodeid ? `${this.series.title_japanese} ${this.episodeno}` : this.series.title_japanese },
+        { hid: 'og:title', name: 'og:title', content: this.episodeid ? `${this.series.titleJA} ${this.episodeno}` : this.series.titleJA },
         { hid: 'og:description', property: 'og:description', content: this.series.description },
         { hid: 'og:site_name', name: 'og:site_name', content: 'Animeloop' },
         { hid: 'og:image', property: 'og:image', content: this.series.image_url_large },
@@ -154,13 +146,13 @@ export default {
     i18nTitle() {
       switch (this.currentLocale) {
         case 'ja':
-          return this.series.title_japanese;
+          return this.series.titleJA;
         case 'zh':
           return this.series.title;
         case 'en':
-          return this.series.title_english;
+          return this.series.titleEN;
         default:
-          return this.series.title_english;
+          return this.series.titleEN;
       }
     },
 
@@ -182,7 +174,7 @@ export default {
 
     upperHalfBackgroundImage() {
       return {
-        background: `linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url(${this.series.image_url_large})`,
+        background: `linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url(${this.series.banner || this.series.cover})`,
       };
     },
   },

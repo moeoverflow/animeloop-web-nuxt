@@ -72,9 +72,6 @@ export default {
     loopid: {
       type: String,
       required: true,
-      validator(val) {
-        return /^[a-z0-9]{24}$/.test(val);
-      },
     },
     /**
     * Video Format of the LoopCard.

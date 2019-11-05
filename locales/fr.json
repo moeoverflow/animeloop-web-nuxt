@@ -11,8 +11,8 @@
   "period": "Période",
   "duration": "Durée",
   "files": "Fichiers",
-  "title-key-1": "title_english",
-  "title-key-3": "title_japanese",
+  "title-key-1": "titleEN",
+  "title-key-3": "titleJA",
   "about-md-file": "about_fr.md",
   "api-md-file": "api_fr.md",
   "language": "Français"

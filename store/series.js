@@ -56,7 +56,6 @@ const series = {
   actions: {
     async fetchSeriesByID({ commit }, { seriesid }) {
       const { data } = await remote.getSeriesByID(seriesid);
-      if (!validate.obj(data)) throw new Error('Cannot fetch data');
       commit('SET_SERIES', { seriesid, data });
     },
 
@@ -66,7 +65,6 @@ const series = {
       const { data } = await remote.getSeriesCount({
         type, season,
       });
-      if (!validate.obj(data)) throw new Error('Cannot fetch data');
       commit('SET_SERIES_COUNT', { data });
     },
 
@@ -76,14 +74,12 @@ const series = {
       const { data } = await remote.getSeriesGroup({
         type, season, page, limit,
       });
-      if (!validate.arr(data)) throw new Error('Cannot fetch data');
       commit('SET_SERIES_GROUP', { data });
       await dispatch('fillSeriesList', { data });
     },
 
     async fetchAllSeasons({ commit }) {
-      const { data } = await remote.getAllSeasons;
-      if (!validate.arr(data)) throw new Error('Cannot fetch data');
+      const { data } = await remote.getAllSeasons();
       commit('SET_SEASONS', { data });
     },
   },

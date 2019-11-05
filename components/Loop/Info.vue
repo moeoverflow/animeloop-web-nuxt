@@ -51,9 +51,7 @@ export default {
     loopid: {
       type: String,
       required: true,
-      validator(value) {
-        return /^[a-z0-9]{24}$/.test(value);
-      },
+      
     },
   },
 

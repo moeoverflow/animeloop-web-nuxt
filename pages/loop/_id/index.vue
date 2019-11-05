@@ -17,10 +17,10 @@ export default {
       meta: [
         { hid: 'twitter:card', name: 'twitter:card', content: 'player' },
         { hid: 'twitter:site', name: 'twitter:site', content: '@animeloopbot' },
-        { hid: 'twitter:title', name: 'twitter:title', content: `${this.loop.series.title_japanese} | ${this.formattedTimeStamps.begin} - ${this.formattedTimeStamps.end}` },
+        { hid: 'twitter:title', name: 'twitter:title', content: `${this.loop.series.titleJA} | ${this.formattedTimeStamps.begin} - ${this.formattedTimeStamps.end}` },
         { hid: 'twitter:description', name: 'twitter:description', content: 'View the loop on Animeloop.' },
         { hid: 'twitter:image', name: 'twitter:image', content: this.loop.files.jpg_1080p },
-        { hid: 'og:title', name: 'og:title', content: `${this.loop.series.title_japanese} | ${this.formattedTimeStamps.begin} - ${this.formattedTimeStamps.end}` },
+        { hid: 'og:title', name: 'og:title', content: `${this.loop.series.titleJA} | ${this.formattedTimeStamps.begin} - ${this.formattedTimeStamps.end}` },
         { hid: 'og:image', name: 'og:image', content: this.loop.files.jpg_1080p },
         { hid: 'og:description', property: 'og:description', content: 'View the loop on Animeloop.' },
         { hid: 'og:site_name', name: 'og:site_name', content: 'Animeloop' },
@@ -33,28 +33,24 @@ export default {
   },
 
   async fetch({ store, error, params: { id } }) {
-    try {
-      await store.dispatch('fetchLoopByID', { loopid: id });
-    } catch (err) {
-      error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
-    }
-  },
-
-  validate({ params }) {
-    return /^[a-z0-9]{24}$/.test(params.id);
+    // try {
+    await store.dispatch('fetchLoopByID', { loopid: id });
+    // } catch (err) {
+    //   error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+    // }
   },
 
   computed: {
     i18nTitle() {
       switch (this.currentLocale) {
         case 'ja':
-          return this.loop.series.title_japanese;
+          return this.loop.series.titleJA;
         case 'zh':
           return this.loop.series.title;
         case 'en':
-          return this.loop.series.title_english;
+          return this.loop.series.titleEN;
         default:
-          return this.loop.series.title_english;
+          return this.loop.series.titleEN;
       }
     },
 

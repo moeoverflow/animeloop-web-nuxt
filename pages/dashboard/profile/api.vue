@@ -98,12 +98,12 @@ export default {
     };
   },
   async fetch({ store, error, req }) {
-    try {
-      const headers = process.server ? req.headers : null;
-      await store.dispatch('fetchUserToken', { headers });
-    } catch (err) {
-      error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
-    }
+    // try {
+    // const headers = process.server ? req.headers : null;
+    // await store.dispatch('fetchUserToken', { headers });
+    // } catch (err) {
+    //   error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+    // }
   },
   computed: {
     tokens() {

@@ -27,23 +27,6 @@ const createStore = () => new Vuex.Store({
     profile,
     api,
   },
-  actions: {
-    async nuxtServerInit({ commit }, {
-      req, store, error,
-    }) {
-      if (req.session && req.session.authUser) {
-        commit('SET_USERAUTH', req.session.authUser);
-        if (!store.state.profile.userInfo) {
-          const headers = process.server ? req.headers : null;
-          try {
-            await store.dispatch('fetchUserInfo', { headers });
-          } catch (err) {
-            error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
-          }
-        }
-      }
-    },
-  },
 });
 
 export default createStore;

@@ -5,7 +5,7 @@
       <span
         v-if="currentLocale !== 'ja'"
         class="SeriesInfo-title--alt"
-      >{{ series.title_japanese }}</span>
+      >{{ series.titleJA }}</span>
     </div>
     <div class="SeriesInfo-seasonWithGenres">
       <Genres
@@ -46,22 +46,20 @@ export default {
     seriesid: {
       type: String,
       required: true,
-      validator(value) {
-        return /^[a-z0-9]{24}$/.test(value);
-      },
+      
     },
   },
   computed: {
     i18nTitle() {
       switch (this.currentLocale) {
         case 'ja':
-          return this.series.title_japanese;
+          return this.series.titleJA;
         case 'zh':
           return this.series.title;
         case 'en':
-          return this.series.title_english;
+          return this.series.titleEN;
         default:
-          return this.series.title_english;
+          return this.series.titleEN;
       }
     },
 

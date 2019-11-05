@@ -18,10 +18,10 @@ const episode = {
         function isStringNaN(str) {
           return Number.isNaN(parseInt(str, 10));
         }
-        if (isStringNaN(prev.no) && isStringNaN(next.no)) return 0;
-        if (isStringNaN(prev.no) && !isStringNaN(next.no)) return 1;
-        if (!isStringNaN(prev.no) && isStringNaN(next.no)) return -1;
-        return (parseInt(prev.no, 10) - parseInt(next.no, 10));
+        if (isStringNaN(prev.index) && isStringNaN(next.index)) return 0;
+        if (isStringNaN(prev.index) && !isStringNaN(next.index)) return 1;
+        if (!isStringNaN(prev.index) && isStringNaN(next.index)) return -1;
+        return (parseInt(prev.index, 10) - parseInt(next.index, 10));
       });
       Vue.set(state.episodeList, seriesid, data);
     },
@@ -34,7 +34,6 @@ const episode = {
   actions: {
     async fetchEpisodeByID({ dispatch, commit }, { episodeid }) {
       const { data } = await remote.getEpisodeByID(episodeid);
-      if (!validate.obj(data)) throw new Error('Cannot fetch data');
       await dispatch('setSeriesByID', { seriesid: data.series.id, data: data.series });
       commit('SET_EPISODE', { episodeid, data });
     },
@@ -45,7 +44,6 @@ const episode = {
 
     async fetchEpisodesBySeriesID({ commit }, { seriesid }) {
       const { data } = await remote.getEpisodesBySeriesID(seriesid);
-      if (!validate.arr(data)) throw new Error('Cannot fetch data');
       commit('SET_EPISODES_BY_SERIES', { seriesid, data });
     },
 

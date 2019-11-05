@@ -81,9 +81,6 @@ export default {
       type: String,
       required: false,
       default: '',
-      validator(val) {
-        return /^[a-z0-9]{24}$/.test(val) || val === '';
-      },
     },
   },
   computed: {

@@ -70,22 +70,19 @@ export default {
     loopid: {
       type: String,
       required: true,
-      validator(val) {
-        return /^[a-z0-9]{24}$/.test(val);
-      },
     },
   },
   computed: {
     i18nTitle() {
       switch (this.currentLocale) {
         case 'ja':
-          return this.loop.series.title_japanese;
+          return this.loop.series.titleJA;
         case 'zh':
           return this.loop.series.title;
         case 'en':
-          return this.loop.series.title_english;
+          return this.loop.series.titleEN;
         default:
-          return this.loop.series.title_english;
+          return this.loop.series.titleEN;
       }
     },
 

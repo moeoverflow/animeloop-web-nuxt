@@ -10,7 +10,7 @@
         slot="no"
         :to="{ name: 'episode-id', params: { id: loop.episode.id }}"
         type="no"
-      >{{ loop.episode.no }}</nuxt-link>
+      >{{ loop.episode.index }}</nuxt-link>
     </BreadCrumb>
     <div class="LoopPage-loopCard">
       <LoopCard
@@ -26,7 +26,7 @@
       class="LoopPage-verticalTitle"
       lang="ja"
     >
-      <p>{{ loop.series.title_japanese }}</p>
+      <p>{{ loop.series.titleJA }}</p>
     </div>
   </section>
 </template>
@@ -73,13 +73,13 @@ export default {
     i18nTitle() {
       switch (this.currentLocale) {
         case 'ja':
-          return this.loop.series.title_japanese;
+          return this.loop.series.titleJA;
         case 'zh':
-          return this.loop.series.title;
+          return this.loop.series.titleCHS || this.loop.series.titleCHT;
         case 'en':
-          return this.loop.series.title_english;
+          return this.loop.series.titleEN || this.loop.series.titleROMAJI;
         default:
-          return this.loop.series.title_english;
+          return this.loop.series.titleEN;
       }
     },
 

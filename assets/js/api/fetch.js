@@ -2,6 +2,7 @@
  * Originally written by NanozukiCrows
  */
 
+import { request as graphql } from 'graphql-request';
 import fetch from 'isomorphic-fetch';
 import qs from 'qs';
 
@@ -51,90 +52,323 @@ async function callApi(request) {
 }
 
 const remote = {
-  getOneRandomLoop: callApi({ url: 'rand/loop', data: { full: true, limit: 1 } }),
-  getRandomLoopList: count => callApi({ url: 'rand/loop', data: { full: true, limit: count } }),
-  getLoopByID: id => callApi({ url: 'loop', data: { id } }),
-  getLoopsByEpisodeID: id => callApi({ url: 'loop', data: { episodeid: id, limit: 1000 } }),
-  getEpisodeByID: id => callApi({ url: 'episode', data: { id } }),
-  getEpisodesBySeriesID: id => callApi({ url: 'episode', data: { seriesid: id, limit: 1000 } }),
+  getOneRandomLoop: async (limit) => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getRandomLoops {
+        randomLoops(limit: 1) {
+          id
+          duration
+          periodBegin
+          periodEnd
+          frameBegin
+          frameEnd
+          files
+          seriesId
+          series {
+            id
+            titleJA
+            titleROMAJI
+            titleEN
+            titleCHS
+            titleCHT
+            genres
+            type
+            startDate
+            endDate
+            cover
+            banner
+            anilistId
+            anilistItem
+            season
+          }
+          episodeId
+          episode {
+            id
+            index
+          }
+        }
+      }
+    `);
+    return { data: data.randomLoops };
+  },
+  getRandomLoopList: async (limit) => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getRandomLoops {
+        randomLoops(limit: ${limit}) {
+          id
+          duration
+          periodBegin
+          periodEnd
+          frameBegin
+          frameEnd
+          files
+          seriesId
+          series {
+            id
+            titleJA
+            titleROMAJI
+            titleEN
+            titleCHS
+            titleCHT
+            genres
+            type
+            startDate
+            endDate
+            cover
+            banner
+            anilistId
+            anilistItem
+            season
+          }
+          episodeId
+          episode {
+            id
+            index
+          }
+        }
+      }
+    `);
+    return { data: data.randomLoops };
+  },
+  getLoopByID: async (id) => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getLoop {
+        loop(id: ${id}) {
+          id
+          duration
+          periodBegin
+          periodEnd
+          frameBegin
+          frameEnd
+          files
+          seriesId
+          series {
+            id
+            titleJA
+            titleROMAJI
+            titleEN
+            titleCHS
+            titleCHT
+            genres
+            type
+            startDate
+            endDate
+            cover
+            banner
+            anilistId
+            anilistItem
+            season
+          }
+          episodeId
+          episode {
+            id
+            index
+          }
+        }
+      }
+    `);
+    return { data: data.loop };
+  },
+  getLoopsByEpisodeID: async (episodeId) => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getLoop {
+        loops(episodeId: ${episodeId}) {
+          id
+          duration
+          periodBegin
+          periodEnd
+          frameBegin
+          frameEnd
+          files
+          seriesId
+          series {
+            id
+            titleJA
+            titleROMAJI
+            titleEN
+            titleCHS
+            titleCHT
+            genres
+            type
+            startDate
+            endDate
+            cover
+            banner
+            anilistId
+            anilistItem
+            season
+          }
+          episodeId
+          episode {
+            id
+            index
+          }
+        }
+      }
+    `);
+    return { data: data.loops };
+  },
+  getEpisodeByID: async (id) => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getEpisode {
+        episode(id: ${id}) {
+          id
+          index
+          series {
+            id
+            titleJA
+            titleROMAJI
+            titleEN
+            titleCHS
+            titleCHT
+            genres
+            type
+            startDate
+            endDate
+            cover
+            banner
+            anilistId
+            anilistItem
+            season
+          }
+        }
+      }
+    `);
+    return { data: data.episode };
+  },
+  getEpisodesBySeriesID: async (seriesId) => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getEpisodes {
+        episodes(seriesId: ${seriesId}) {
+          id
+          index
+          series {
+            id
+            titleJA
+            titleROMAJI
+            titleEN
+            titleCHS
+            titleCHT
+            genres
+            type
+            startDate
+            endDate
+            cover
+            banner
+            anilistId
+            anilistItem
+            season
+          }
+        }
+      }
+    `);
+    return { data: data.episodes };
+  },
   getTagsByID: id => callApi({ url: 'tag', data: { loopid: id } }),
-  getSeriesByID: id => callApi({ url: 'series', data: { id } }),
-  getSeriesByString: string => callApi({ url: 'search/series', data: { value: string } }),
+  getSeriesByID: async (id) => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getSeries {
+        series(id: ${id}) {
+          id
+          titleJA
+          titleROMAJI
+          titleEN
+          titleCHS
+          titleCHT
+          genres
+          type
+          startDate
+          endDate
+          cover
+          banner
+          anilistId
+          anilistItem
+          season
+        }
+      }
+    `);
+    return { data: data.series };
+  },
+  getSeriesByString: async (titleLike) => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getSerieses {
+        serieses(titleLike: "${titleLike}") {
+          offset
+          limit
+          count
+          rows {
+            id
+            titleJA
+            titleROMAJI
+            titleEN
+            titleCHS
+            titleCHT
+            genres
+            type
+            startDate
+            endDate
+            cover
+            banner
+            anilistId
+            anilistItem
+            season
+          }
+        }
+      }
+    `);
+    return { data: data.serieses.rows };
+  },
   // getSeriesPageCount: callApi({ url: 'series/page/count' }),
   // getSeriesByPageNum: num => callApi({ url: 'series', data: { page: num } }),
   // getSeriesBySeason: seasonString => call({ url: ''})
-  getAllSeasons: callApi({ url: 'series/season' }),
-  getSeriesGroup: ({
-    type, season, page, limit,
-  } = {}) => callApi({
-    url: 'series',
-    data: {
-      type, season, page, limit,
-    },
-  }),
-  getSeriesCount: ({
-    type, season,
-  } = {}) => callApi({
-    url: 'series/count',
-    data: {
-      season, type,
-      // Avoid request being blocked by uBlock
-    },
-  }),
-  // Auth API
-  signup: (username, email, password, gRecaptchaResponse) => callApi({
-    url: 'auth/register',
-    method: 'POST',
-    data: {
-      username,
-      email,
-      password,
-      'g-recaptcha-response': gRecaptchaResponse,
-    },
-  }),
-  login: (username, password, gRecaptchaResponse) => callApi({
-    url: 'auth/login',
-    method: 'POST',
-    data: {
-      username,
-      password,
-      'g-recaptcha-response': gRecaptchaResponse,
-    },
-  }),
-  logout: () => callApi({
-    url: 'auth/logout',
-    method: 'POST',
-    data: {},
-  }),
-  fetchUserInfo: headers => callApi({
-    url: 'profile/get-userinfo',
-    headers,
-    data: {},
-  }),
-  updateUserInfo: (email, newPassword) => callApi({
-    url: 'profile/update-userinfo',
-    method: 'POST',
-    data: {
-      email,
-      newPassword,
-    },
-  }),
-  fetchUserToken: headers => callApi({
-    url: 'auth/token',
-    headers,
-  }),
-  createNewToken: (data, headers) => callApi({
-    url: 'auth/token/new',
-    method: 'post',
-    headers,
-    data,
-  }),
-  revokeToken: (data, headers) => callApi({
-    url: 'auth/token/revoke',
-    method: 'post',
-    headers,
-    data,
-  }),
+  getAllSeasons: async () => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query {
+        season
+      }
+    `);
+    return { data: data.season };
+  },
+
+  getSeriesGroup: async () => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getSerieses {
+        serieses {
+          offset
+          limit
+          count
+          rows {
+            id
+            titleJA
+            titleROMAJI
+            titleEN
+            titleCHS
+            titleCHT
+            genres
+            type
+            startDate
+            endDate
+            cover
+            banner
+            anilistId
+            anilistItem
+            season
+          }
+        }
+      }
+    `);
+    return { data: data.serieses.rows };
+  },
+  getSeriesCount: async () => {
+    const data = await graphql('http://127.0.0.1:8970/graphql', `
+      query getSerieses {
+        serieses(limit: 1) {
+          count
+        }
+      }
+    `);
+    return { data: data.serieses.count };
+  },
 };
 
 export default remote;

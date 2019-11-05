@@ -29,9 +29,6 @@ export default {
     seriesid: {
       type: String,
       required: true,
-      validator(value) {
-        return /^[a-z0-9]{24}$/.test(value);
-      },
     },
   },
 
@@ -40,13 +37,13 @@ export default {
     i18nTitle() {
       switch (this.currentLocale) {
         case 'ja':
-          return this.series.title_japanese;
+          return this.series.titleJA;
         case 'zh':
-          return this.series.title;
+          return this.series.titleCHS || this.series.titleCHT;
         case 'en':
-          return this.series.title_english;
+          return this.series.titleEN || this.series.titleROMAJI;
         default:
-          return this.series.title_english;
+          return this.series.titleEN || this.series.titleROMAJI;
       }
     },
 
@@ -60,7 +57,7 @@ export default {
 
     coverBackgroundImageStyle() {
       return {
-        'background-image': `url(${this.series.image_url_large})`,
+        'background-image': `url(${this.series.cover})`,
       };
     },
   },

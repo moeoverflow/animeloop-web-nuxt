@@ -23,15 +23,11 @@ export default {
   },
 
   async fetch({ store, error, params: { id } }) {
-    try {
-      await store.dispatch('fetchEpisodeByID', { episodeid: id });
-    } catch (err) {
-      error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
-    }
-  },
-
-  validate({ params }) {
-    return /^[a-z0-9]{24}$/.test(params.id);
+    // try {
+    await store.dispatch('fetchEpisodeByID', { episodeid: id });
+    // } catch (err) {
+    //   error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+    // }
   },
 
   computed: {

@@ -56,35 +56,31 @@ const loop = {
   getters: {
     formatTimeStamps: state => loopid => ({
       duration: state.loops[loopid].duration.toFixed(3),
-      begin: `${tidyTimestamp(state.loops[loopid].period.begin)}`,
-      end: `${tidyTimestamp(state.loops[loopid].period.end)}`,
+      begin: `${tidyTimestamp(state.loops[loopid].periodBegin)}`,
+      end: `${tidyTimestamp(state.loops[loopid].periodEnd)}`,
     }),
   },
 
   actions: {
     async fetchLoopByID({ commit }, { loopid }) {
       const { data } = await remote.getLoopByID(loopid);
-      if (!validate.obj(data)) throw new Error('Cannot fetch data');
       commit('SET_LOOP', { loopid, data });
     },
 
     async fetchRandomLoop({ dispatch, commit }) {
       const { data } = await remote.getRandomLoopList(1);
-      if (!validate.arr(data)) throw new Error('Cannot fetch data');
       commit('SET_RANDOM_PAGE_LOOP_ID', { data });
       await dispatch('setLoops', { data });
     },
 
     async fetchRandomLoopList({ dispatch, commit }, { count }) {
       const { data } = await remote.getRandomLoopList(count);
-      if (!validate.arr(data)) throw new Error('Cannot fetch data');
       commit('SET_RANDOM_LOOPLIST', { data });
       await dispatch('setLoops', { data });
     },
 
     async fetchLoopsByEpisodeID({ dispatch, commit }, { episodeid }) {
       const { data } = await remote.getLoopsByEpisodeID(episodeid);
-      if (!validate.arr(data)) throw new Error('Cannot fetch data');
       commit('SET_LOOPLIST', { episodeid, data });
       await dispatch('setLoops', { data });
     },
