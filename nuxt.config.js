@@ -96,7 +96,7 @@ module.exports = {
   ],
 
   router: {
-    middleware: 'setLang',
+    middleware: ['setLang', 'mongodbid'],
   },
 
   modules: [
