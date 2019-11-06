@@ -9,13 +9,14 @@ import qs from 'qs';
 
 import { apiPrefix } from '~/config';
 
-const graphQLClient = new GraphQLClient('http://127.0.0.1:8970/graphql', {
+const apiBaseUrl = process.client ? apiPrefix.browser : apiPrefix.server;
+
+const graphQLClient = new GraphQLClient(`${apiBaseUrl}/graphql`, {
   headers: {
     Accept: 'application/json',
   },
 });
 
-const apiBaseUrl = process.client ? apiPrefix.browser : apiPrefix.server;
 
 function encodeFormData(data) {
   return Object.entries(data).map(item => (
