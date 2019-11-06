@@ -16,17 +16,6 @@
       />
       <span>{{ $t(entry.name) }}</span>
     </nuxt-link>
-    <a
-      href="https://animeloop.org/api/docs/"
-      class="NavbarEntry-link"
-      @click.native="toggleBurger"
-    >
-      <FontAwesomeIcon
-        icon="terminal"
-        class="NavbarEntry-faIcon"
-      />
-      <span>{{ $t('navbar.api') }}</span>
-    </a>
   </div>
 </template>
 
