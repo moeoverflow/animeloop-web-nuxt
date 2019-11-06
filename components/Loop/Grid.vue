@@ -28,17 +28,17 @@
   >
     <div
       v-for="loop in loopList"
-      :key="loop.id"
+      :key="loop.uuid"
       class="LoopGrid-child"
     >
-      <nuxt-link :to="{ name: 'loop-id', params: { id: loop.id }}">
+      <nuxt-link :to="{ name: 'loop-id', params: { id: loop.uuid }}">
         <LoopCard
-          :loopid="loop.id"
+          :loopid="loop.uuid"
           page-type="episode"
           loop-type="gif"
         />
         <CardDetails
-          :loopid="loop.id"
+          :loopid="loop.uuid"
           class="LoopGrid-cardDetails"
           type="episode"
         />

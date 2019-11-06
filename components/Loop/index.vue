@@ -14,13 +14,13 @@
     </BreadCrumb>
     <div class="LoopPage-loopCard">
       <LoopCard
-        :loopid="loop.id"
+        :loopid="loop.uuid"
         loop-type="mp4"
         page-type="loop"
       />
     </div>
     <div class="LoopPage-info">
-      <LoopInfo :loopid="loop.id" />
+      <LoopInfo :loopid="loop.uuid" />
     </div>
     <div
       class="LoopPage-verticalTitle"

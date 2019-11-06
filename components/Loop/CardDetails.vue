@@ -23,7 +23,7 @@
       </nuxt-link>
     </div>
     <div class="CardDetails-timestamp">
-      <nuxt-link :to="{ name: 'loop-id', params: { id: loop.id }}">
+      <nuxt-link :to="{ name: 'loop-id', params: { id: loop.uuid }}">
         {{ formattedTimeStamps.begin }} - {{ formattedTimeStamps.end }}
       </nuxt-link>
     </div>

@@ -28,7 +28,7 @@ const loop = {
 
     SET_LOOPS: (state, { data }) => {
       data.forEach((val) => {
-        Vue.set(state.loops, val.id, val);
+        Vue.set(state.loops, val.uuid, val);
       });
     },
 
@@ -37,13 +37,13 @@ const loop = {
     },
 
     SET_RANDOM_PAGE_LOOP_ID: (state, { data }) => {
-      state.randomPageLoopid = data[0].id;
+      state.randomPageLoopid = data[0].uuid;
     },
 
     SET_RANDOM_LOOPLIST: (state, { data }) => {
       state.randomLoopList = [];
       data.forEach((val) => {
-        state.randomLoopList.push(val.id);
+        state.randomLoopList.push(val.uuid);
       });
     },
 
