@@ -11,7 +11,7 @@
     <div class="CardDetails-rightHalf">
       <div class="CardDetails-episodeNo">
         <nuxt-link :to="{ name: 'episode-id', params: { id: loop.episode.id }}">
-          {{ loop.episode.no }}
+          {{ loop.episode.index }}
         </nuxt-link>
       </div>
       <nuxt-link :to="{ name: 'list', query: { type: loop.series.type }}">

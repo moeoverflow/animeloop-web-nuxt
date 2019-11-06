@@ -65,7 +65,7 @@ export default {
 
   // head() {
   //   return {
-  //     title: `${this.loop.episode.no} | ${this.i18nTitle} | Animeloop`,
+  //     title: `${this.loop.episode.index} | ${this.i18nTitle} | Animeloop`,
   //   };
   // },
 

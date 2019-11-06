@@ -21,11 +21,11 @@ export default {
   },
 
   async fetch({ store, error }) {
-    // try {
-    await store.dispatch('fetchRandomLoopList', { count: 12 });
-    // } catch (err) {
-    //   error({ statusCode: 404, message: 'API returned error', customMsg: err.message });
-    // }
+    try {
+      await store.dispatch('fetchRandomLoopList', { count: 12 });
+    } catch (err) {
+      error({ statusCode: 404, message: 'API returned error', customMsg: err.message });
+    }
   },
 
 };

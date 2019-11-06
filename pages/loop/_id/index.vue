@@ -13,7 +13,7 @@ export default {
 
   head() {
     return {
-      title: `${this.loop.episode.no} | ${this.i18nTitle} | Animeloop`,
+      title: `${this.loop.episode.index} | ${this.i18nTitle} | Animeloop`,
       meta: [
         { hid: 'twitter:card', name: 'twitter:card', content: 'player' },
         { hid: 'twitter:site', name: 'twitter:site', content: '@animeloopbot' },
@@ -33,11 +33,11 @@ export default {
   },
 
   async fetch({ store, error, params: { id } }) {
-    // try {
-    await store.dispatch('fetchLoopByID', { loopid: id });
-    // } catch (err) {
-    //   error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
-    // }
+    try {
+      await store.dispatch('fetchLoopByID', { loopid: id });
+    } catch (err) {
+      error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+    }
   },
 
   computed: {

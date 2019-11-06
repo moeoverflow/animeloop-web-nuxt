@@ -1,58 +1,5 @@
 <template>
   <div>
-    <!-- <div class="ListPage-filter">
-      <div class="ListPage-select year-selector">
-        <select
-          v-model="selectedYear"
-        >
-          <option
-            v-for="(mon, year) in seasons"
-            :key="year"
-            :value="year"
-          >
-            {{ year }}
-          </option>
-        </select>
-      </div>
-      <div class="ListPage-select month-selector">
-        <select
-          v-model="selectedMonth"
-        >
-          <option
-            v-for="mon in seasons[selectedYear].map(Number).sort((prev, next) => prev - next)"
-            :key="mon.toString()"
-            :value="mon.toString()"
-          >
-            {{ mon }}
-          </option>
-        </select>
-      </div>
-      <div class="ListPage-select type-selector">
-        <select
-          v-model="selectedType"
-        >
-          <option
-            selected
-            value=""
-          >(All)</option>
-          <option
-            v-for="type in seriesTypes"
-            :key="type"
-            :value="type"
-          >
-            {{ type }}
-          </option>
-        </select>
-      </div>
-      <button
-        class="ListPage-filterBtn"
-        @click="applyFilter"
-      >
-        <FontAwesomeIcon
-          icon="filter"
-        />
-      </button>
-    </div> -->
     <SeriesGrid
       type="listPage"
     />
@@ -135,39 +82,29 @@ export default {
   key: to => to.fullPath,
 
   data() {
-    const { seasons } = this.$store.state.series;
-    const latestYear = Object.keys(seasons)[Object.keys(seasons).length - 1];
-    const latestMonth = Math.max(...seasons[latestYear].map(Number));
-    const { type = '', season = `${latestYear}-${latestMonth}`, page = '1' } = this.$route.query;
+    const { page = '1' } = this.$route.query;
     return {
       selectedPageNum: page.toString(),
-      selectedType: type,
-      selectedYear: season.split('-')[0],
-      selectedMonth: season.split('-')[1],
-      seriesTypes: ['TV', 'Movie', 'TV Short', 'OVA', 'ONA', 'Special'],
     };
   },
 
   async fetch({
     store, query, redirect, error,
   }) {
-    if (Object.keys(store.state.series.seasons).length === 0) {
-      await store.dispatch('fetchAllSeasons');
-    }
+    try {
+      if (query.page === '1') {
+        const { page: _page, ...queryWithoutPage } = query;
+        redirect(301, '/list', queryWithoutPage);
+      }
 
-    if (query.page === '1') {
-      const { page: _page, ...queryWithoutPage } = query;
-      redirect(301, '/list', queryWithoutPage);
+      await store.dispatch('fetchSeriesGroup', ({
+        offset: (Math.max(0, (query.page ? parseInt(query.page, 10) : 1) - 1)) * 30,
+        limit: 30,
+      }));
+    } catch (err) {
+      error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+      console.log(err);
     }
-
-    const { seasons } = store.state.series;
-    const latestYear = Object.keys(seasons)[Object.keys(seasons).length - 1];
-    const latestMonth = Math.max(...seasons[latestYear].map(Number));
-    const { type = '', season = `${latestYear}-${latestMonth}`, page = 1 } = query;
-    await store.dispatch('fetchSeriesGroup', ({
-      offset: (Math.max(0, (query.page ? parseInt(query.page, 10) : 1) - 1)) * 30,
-      limit: 30,
-    }));
   },
 
   computed: {
@@ -176,7 +113,6 @@ export default {
     },
 
     pageCount() {
-      console.log('this.seriesCount', this.seriesCount);
       return Math.ceil(this.seriesCount / 30);
     },
 

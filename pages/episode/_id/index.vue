@@ -2,7 +2,7 @@
   <SeriesPage
     :seriesid="episodes.series.id"
     :episodeid="episodeid"
-    :episodeno="episodes.no"
+    :episodeno="episodes.index"
   />
 </template>
 
@@ -23,11 +23,11 @@ export default {
   },
 
   async fetch({ store, error, params: { id } }) {
-    // try {
-    await store.dispatch('fetchEpisodeByID', { episodeid: id });
-    // } catch (err) {
-    //   error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
-    // }
+    try {
+      await store.dispatch('fetchEpisodeByID', { episodeid: id });
+    } catch (err) {
+      error({ statusCode: 404, message: 'API returned Error', customMsg: err.message });
+    }
   },
 
   computed: {

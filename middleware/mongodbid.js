@@ -3,10 +3,7 @@ const { apiPrefix } = require('../config');
 
 const apiBaseUrl = process.client ? apiPrefix.browser : apiPrefix.server;
 
-export default async function (context) {
-  console.log(context);
-  const { route, redirect, next } = context;
-  console.log('route', route);
+export default async function ({ route, redirect }) {
   if (
     route.fullPath.startsWith('/loop/')
     && route.params.id && route.params.id.length === 24

@@ -46,7 +46,7 @@ export default {
     seriesid: {
       type: String,
       required: true,
-      
+
     },
   },
   computed: {

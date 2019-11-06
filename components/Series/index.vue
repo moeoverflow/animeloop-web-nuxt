@@ -95,7 +95,7 @@ export default {
     seriesid: {
       type: String,
       required: true,
-      
+
     },
     /**
      * `episodeid` of current Episode.

@@ -3,7 +3,11 @@ export default {
   name: 'PageRandom',
 
   async fetch({ store, error, redirect }) {
-    await store.dispatch('fetchRandomLoop');
+    try {
+      await store.dispatch('fetchRandomLoop');
+    } catch (err) {
+      error({ statusCode: 404, message: 'API returned Error' });
+    }
     const randomLoopID = store.state.loop.randomPageLoopid;
     redirect(302, `/loop/${randomLoopID}`);
   },
