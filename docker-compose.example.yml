@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  animeloop-web-nuxt:
+    container_name: animeloop-web-nuxt
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    expose:
+      - 8080
+    ports:
+      - 11102:8080
+    networks:
+      - postgres_default
+      - redis_default
+    command: yarn start
+networks:
+  postgres_default:
+    external: true
+  redis_default:
+    external: true
